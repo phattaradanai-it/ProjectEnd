@@ -1,0 +1,154 @@
+@import "style_fonts.css";
+
+html {
+  font-family: "sutregular";
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+}
+
+.menu {
+  margin: 0;
+}
+
+.menu nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+  opacity: 0.9;
+
+  background: #292929;
+}
+
+.menu a {
+  font-size: 1vw;
+  color: #e3e3e3;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: #292929;
+}
+
+.menu ul {
+  margin: 0 3vw 0 0;
+  padding: 0;
+  list-style-type: none;
+  position: relative;
+}
+
+.menu ul li {
+  display: inline-block;
+  position: relative;
+}
+
+.menu ul li a {
+  display: block;
+  padding: 1.2vw 1.3vw;
+}
+
+.menu ul li i {
+  padding-left: 8px;
+}
+
+.menu ul li:hover {
+  background: lightgrey;
+}
+
+.menu ul li:hover ul {
+  display: block;
+}
+
+.menu ul li a:hover {
+  color: #292929;
+}
+
+.menu ul ul {
+  position: absolute;
+  min-width: 200px;
+  display: none;
+}
+
+/*  add on sub menu hover*/
+.menu ul li ul li ul {
+  display: none !important;
+}
+.menu ul li ul li:hover ul {
+  display: block !important;
+}
+
+.menu ul ul li {
+  text-align: left;
+  display: block;
+  background: #292929;
+}
+
+.logo {
+  padding-top: 1vh;
+  display: block;
+  margin: 0 0 -0.5vw 3vw;
+}
+
+.row-bars {
+  display: none;
+  align-items: center;
+  padding: unset;
+  /* width: 100%; */
+  justify-content: space-between;
+  padding: 2vw 2vw 0 2vw;
+  color: #e3e3e3;
+  font-size: 4vw;
+}
+
+.logo-bars {
+  /* padding-top: 2vw;
+    margin: 0 0 -0.5vw 1vw; */
+}
+
+@media (max-width: 780px) {
+  .logo {
+    display: none;
+  }
+
+  .row-bars {
+    display: flex;
+  }
+
+  .menu nav {
+    display: block;
+  }
+
+  .menu a {
+    font-size: 3.5vw;
+  }
+
+  .menu ul {
+    display: none;
+    width: 100%;
+    position: static;
+    background: #292929;
+  }
+
+  .menu ul li {
+    display: block;
+  }
+
+  .menu ul li a {
+    padding: 2.5vw 3vw;
+  }
+
+  .menu ul ul {
+    position: static;
+    background: #292929;
+  }
+
+  .menu ul li ul li ul {
+    display: block !important;
+  }
+}

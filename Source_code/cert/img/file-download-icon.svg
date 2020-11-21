@@ -1,0 +1,15 @@
+<svg id="file-download-icon" xmlns="http://www.w3.org/2000/svg" width="159.247" height="159.247" viewBox="0 0 159.247 159.247">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="Path_6" data-name="Path 6" class="cls-1" d="M97.894,42.812H71.353V3H31.541V42.812H5L51.447,89.259ZM5,102.529V115.8H97.894V102.529Z" transform="translate(28.176 16.906)"/>
+  <path id="Path_7" data-name="Path 7" class="cls-2" d="M0,0H159.247V159.247H0Z"/>
+</svg>
