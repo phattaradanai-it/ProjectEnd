@@ -35,7 +35,6 @@ include "cert_function.php";
 <body>
     <?php include 'header.php';?>]
 
-    <h1>ttttttt</h1>
 
     <!-- <div class="container-fluid">
             <div class="row">
