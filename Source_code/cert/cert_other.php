@@ -20,7 +20,7 @@ foreach ($_SESSION['cert'] as $key => $value) {
      $badge = (object) [];
     foreach ($_SESSION['badge'] as $badge_key => $badge_value) {
         if ($badge_value->cert_id == $value->cert_id) {
-            $badge->$badge_key = $badge_value;   
+            // $badge->$badge_key = $badge_value;   //ไม่ใช้แล้ว
             if ($badge_value->practice_score + $badge_value->objective_score < 80) {
                 $honor = false;
             }

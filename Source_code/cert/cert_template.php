@@ -42,6 +42,8 @@ if ($cert_date > $new_badge_date) {
             </div>
         </div>
 
+<!-- ใช้ตรงนี้ -->
+
         <div class="badge-cert">
             <?php if ($cert_type) {?>
             <div class="row ml-0 mr-0 " style="margin-bottom:-4%">
@@ -51,6 +53,9 @@ if ($cert_date > $new_badge_date) {
                 </div>
             </div>
             <?php } else {?>
+
+<!-- ถึงนี้ -->
+
             <?php $i = count((array) $badge) % 2 != 0 ? 0 : 1;?>
             <?php foreach ($badge as $badge_key => $badge_value) {?>
             <?php $percent = calBadgeLevel($badge_value->practice_score, $badge_value->objective_score, $badge_value->course_score);?>
