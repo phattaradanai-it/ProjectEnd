@@ -23,7 +23,7 @@ foreach ($_SESSION['cert'] as $key => $cert_value) {
     }
 }
 
-foreach ($_SESSION['badge'] as $key => $badge_value) {
+foreach ($_SESSION['badge'] as $key => $badge_value) {   //// ใช้ดูเหรียญ
     if ($badge_value->cert_id == $cert_id) {
         $badge->$key = $badge_value;
         if ($badge_value->practice_score + $badge_value->objective_score < 80) {
