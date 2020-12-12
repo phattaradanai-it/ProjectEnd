@@ -1,10 +1,7 @@
 <?php
 session_start();
 include "check_login.php";
-include "get_cert.php";
-include "get_badge.php";
-include "get_attendance.php";
-include "cert_function.php";
+
 
 // echo "<script>console.log('" . json_encode($_SESSION['attendance']) . "');</script>";
 ?>
@@ -51,11 +48,24 @@ include "cert_function.php";
 
             <div class="row cert-mg-t">
                 <!--  Certification  -->
-          
+<?php
 
-
-          
-
+$conn = new mysqli("localhost","root", "", "digitech");
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+        $sql = "SELECT * FROM program";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+              echo "TH: " . $row["program_name_th"]."<br>"."EN: ".$row["program_name_en"]."<br>";
+            }
+          } else {
+            echo "0 results";
+          }
+          $conn->close();
+?>
 
             </div>
         </div>
