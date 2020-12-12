@@ -5,7 +5,6 @@ include "get_cert.php";
 include "get_badge.php";
 include "get_attendance.php";
 include "cert_function.php";
-include "get_search.php";
 
 // echo "<script>console.log('" . json_encode($_SESSION['attendance']) . "');</script>";
 ?>
@@ -52,7 +51,12 @@ include "get_search.php";
 
             <div class="row cert-mg-t">
                 <!--  Certification  -->
-                <?php !empty($_SESSION['cert']) ? include "cert_other.php" : '';?>
+          
+
+
+          
+
+
             </div>
         </div>
 
