@@ -28,12 +28,11 @@ include "cert_function.php";
     <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr JS -->
     <!-- <script src="js/vendor/modernizr-2.8.3.min.js"></script> -->
-
 </head>
+
 
 <body>
     <?php include 'header.php';?>]
-
 
     <!-- <div class="container-fluid">
             <div class="row">

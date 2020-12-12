@@ -5,6 +5,7 @@ include "get_cert.php";
 include "get_badge.php";
 include "get_attendance.php";
 include "cert_function.php";
+include "get_search.php";
 
 // echo "<script>console.log('" . json_encode($_SESSION['attendance']) . "');</script>";
 ?>
