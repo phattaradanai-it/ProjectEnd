@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include "check_login.php";
@@ -43,35 +44,102 @@ include "check_login.php";
             </div>
         </div> -->
 
+
     <div class="section-area  ">
         <div class="container-fluid">
 
             <div class="row cert-mg-t">
                 <!--  Certification  -->
-<?php
 
-$conn = new mysqli("localhost","root", "", "digitech");
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-        $sql = "SELECT * FROM program";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-              echo "TH: " . $row["program_name_th"]."<br>"."EN: ".$row["program_name_en"]."<br>";
-            }
-          } else {
-            echo "0 results";
-          }
-          $conn->close();
-?>
+                <?php
+                $conn = new mysqli("localhost","root", "", "digitech");
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                $perpage = 10;
+                if (isset($_GET['page'])) {
+                     $page = $_GET['page'];
+                } else {
+                     $page = 1;
+                }
+                $start = ($page - 1) * $perpage;
+                
+                
+                $sql = "select id, course_of_program.program_id, program.program_name_th, program.program_name_en, 
+                course.course_name_th,course.course_name_en
+                from course_of_program 
+                LEFT JOIN program on course_of_program.program_id = program.program_id 
+                LEFT JOIN course on course_of_program.course_id = course.course_id
+                limit {$start} , {$perpage} ";
+                $query = mysqli_query($conn, $sql)  or die ( $mysqli->error );
+                ?>
+                <div class="container">
+                <div class="row">
+                <div class="col-lg-12">
+                <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                <th>#</th>
+                <th>program_id</th>
+                <th>program_name_th</th>
+                <th>program_name_en</th>
+                <th>course_name_th</th>
+                <th>course_name_en</th>
+                </tr> 
+                </thead>
+                <tbody>
+                <?php while ($result = mysqli_fetch_assoc($query))  { ?>
+                <tr>
+                <td><?php echo $result['id']; ?></td>
+                <td><?php echo $result['program_id']; ?></td>
+                <td><?php echo $result['program_name_th']; ?></td>
+                <td><?php echo $result['program_name_en']; ?></td>
+                <td><?php echo $result['course_name_th']; ?></td>
+                <td><?php echo $result['course_name_en']; ?></td>
+                </tr>
+                <?php } ?>
+                </tbody>
+                </table>
+
+                <?php
+                $sql2 = "select * from course_of_program ";
+                $query2 = mysqli_query($conn, $sql2);
+                $total_record = mysqli_num_rows($query2);
+                $total_page = ceil($total_record / $perpage);
+                ?>
+                
+                <nav>
+                <ul class="pagination">
+                <li>
+                <a href="search_cert.php?page=1" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                </a>
+                </li>
+                <?php for($i=1;$i<=$total_page;$i++){ ?>
+                <li><a href="search_cert.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                <?php } ?>
+                <li>
+                <a href="search_cert.php?page=<?php echo $total_page;?>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                </a>
+                </li>
+                </ul>
+                </nav>
+
+                
+                </div>
+                </div>       
+                </div>
 
             </div>
-        </div>
+
+
 
         <!-- Footer -->
         <?php include "footer.php";?>
+
 
         <!-- Modal -->
         <div class="modal fade qr-modal" id="myModal" role="dialog">
@@ -91,6 +159,8 @@ if ($conn->connect_error) {
                 </div>
             </div>
         </div>
+
+
 
     </div>
 
