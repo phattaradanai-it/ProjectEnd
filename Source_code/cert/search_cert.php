@@ -1,10 +1,18 @@
+<style>
+.pagination {
+  display: inline-block;
+}
 
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+</style>
 <?php
 session_start();
 include "check_login.php";
-
-
-// echo "<script>console.log('" . json_encode($_SESSION['attendance']) . "');</script>";
 ?>
 <!doctype html>
 <html class="no-js" lang="th">
@@ -20,35 +28,17 @@ include "check_login.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-    <!-- style CSS -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- modernizr JS -->
-    <!-- <script src="js/vendor/modernizr-2.8.3.min.js"></script> -->
-
 </head>
 
 <body>
     <?php include 'header.php';?>]
 
 
-    <!-- <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="../images/logo_banner_white.png" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-
+        <br><br><br><br>
     <div class="section-area  ">
         <div class="container-fluid">
 
-            <div class="row cert-mg-t">
+            <div class="row cert-mg-t"> 
                 <!--  Certification  -->
 
                 <?php
@@ -58,7 +48,7 @@ include "check_login.php";
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $perpage = 10;
+                $perpage = 6;
                 if (isset($_GET['page'])) {
                      $page = $_GET['page'];
                 } else {
@@ -75,33 +65,28 @@ include "check_login.php";
                 limit {$start} , {$perpage} ";
                 $query = mysqli_query($conn, $sql)  or die ( $mysqli->error );
                 ?>
-                <div class="container">
-                <div class="row">
-                <div class="col-lg-12">
-                <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                <th>#</th>
-                <th>program_id</th>
-                <th>program_name_th</th>
-                <th>program_name_en</th>
-                <th>course_name_th</th>
-                <th>course_name_en</th>
-                </tr> 
-                </thead>
-                <tbody>
-                <?php while ($result = mysqli_fetch_assoc($query))  { ?>
-                <tr>
-                <td><?php echo $result['id']; ?></td>
-                <td><?php echo $result['program_id']; ?></td>
-                <td><?php echo $result['program_name_th']; ?></td>
-                <td><?php echo $result['program_name_en']; ?></td>
-                <td><?php echo $result['course_name_th']; ?></td>
-                <td><?php echo $result['course_name_en']; ?></td>
-                </tr>
-                <?php } ?>
-                </tbody>
-                </table>
+               
+                 <div class="container-fluid">         
+                    <div class="row">
+                         <?php while ($result = mysqli_fetch_assoc($query))  { ?>
+                            <div class="col-sm-6 mx-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                         <h5 class="card-title"><?php echo $result['program_name_en']; ?><br>
+                                        <?php echo $result['program_name_th']; ?></h5>
+                                         <br>
+                                         <br>
+                                         <p>Course : <?php echo $result['course_name_en']; ?></p>
+                                         <p>รายวิชา : <?php echo $result['course_name_th']; ?></p>
+                                        <div class="float-right">
+                                             <a href="#" class="btn btn-primary">Detail</a>
+                                        </div>
+                                    </div>
+                                </div><br><br>
+                            </div>
+                        <?php } ?>
+                     </div>
+                 </div>
 
                 <?php
                 $sql2 = "select * from course_of_program ";
@@ -110,35 +95,24 @@ include "check_login.php";
                 $total_page = ceil($total_record / $perpage);
                 ?>
                 
-                <nav>
-                <ul class="pagination">
-                <li>
-                <a href="search_cert.php?page=1" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                </a>
-                </li>
-                <?php for($i=1;$i<=$total_page;$i++){ ?>
-                <li><a href="search_cert.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                <?php } ?>
-                <li>
-                <a href="search_cert.php?page=<?php echo $total_page;?>" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                </a>
-                </li>
-                </ul>
-                </nav>
 
-                
-                </div>
+                <div class="pagination">
+                    <a href="search_cert.php?page=1">&laquo;</a>
+                    <?php for($i=1;$i<=$total_page;$i++){ ?>
+                    <li><a href="search_cert.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                    <?php } ?>
+                    <a href="search_cert.php?page=<?php echo $total_page;?>">&raquo;</a>
+                </div>                        
+
+             
+
                 </div>       
                 </div>
 
             </div>
 
-
-
         <!-- Footer -->
-        <?php include "footer.php";?>
+
 
 
         <!-- Modal -->
@@ -160,9 +134,8 @@ include "check_login.php";
             </div>
         </div>
 
-
-
     </div>
+
 
     <?php if (isset($_SESSION["user_qr_login"]) && $_SESSION["user_qr_login"] == true) {?>
     <?php $_SESSION["user_qr_login"] = false;?>

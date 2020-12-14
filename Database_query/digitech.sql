@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.10
--- https://www.phpmyadmin.net
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Sep 28, 2020 at 04:14 PM
--- Server version: 10.4.12-MariaDB
--- PHP Version: 7.2.21
+-- Host: 127.0.0.1
+-- Generation Time: Dec 14, 2020 at 01:26 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,11 +27,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `attendance`
 --
 
-CREATE TABLE IF NOT EXISTS `attendance` (
+CREATE TABLE `attendance` (
   `attendance_id` int(11) NOT NULL,
   `std_id` varchar(11) NOT NULL,
   `program_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `attendance`
@@ -269,11 +270,11 @@ INSERT INTO `attendance` (`attendance_id`, `std_id`, `program_id`) VALUES
 -- Table structure for table `badge`
 --
 
-CREATE TABLE IF NOT EXISTS `badge` (
+CREATE TABLE `badge` (
   `badge_id` bigint(20) NOT NULL,
   `enroll_id` int(11) NOT NULL,
   `badge_img_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=632 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `badge`
@@ -789,10 +790,10 @@ INSERT INTO `badge` (`badge_id`, `enroll_id`, `badge_img_id`) VALUES
 -- Table structure for table `badge_img`
 --
 
-CREATE TABLE IF NOT EXISTS `badge_img` (
+CREATE TABLE `badge_img` (
   `badge_img_id` int(11) NOT NULL,
   `badge_img_name` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `badge_img`
@@ -840,13 +841,13 @@ INSERT INTO `badge_img` (`badge_img_id`, `badge_img_name`) VALUES
 -- Table structure for table `cert`
 --
 
-CREATE TABLE IF NOT EXISTS `cert` (
+CREATE TABLE `cert` (
   `cert_id` bigint(20) NOT NULL,
   `cert_name_en` varchar(500) NOT NULL,
   `cert_name_th` varchar(500) NOT NULL,
   `cert_img` varchar(100) DEFAULT NULL,
   `cert_type_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cert`
@@ -859,7 +860,95 @@ INSERT INTO `cert` (`cert_id`, `cert_name_en`, `cert_name_th`, `cert_img`, `cert
 (4, 'Certificate in Digital Information Management', 'สัมฤทธิบัตรการจัดการสารสนเทศดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
 (5, 'Certificate in Visual Design for Digital Media', 'สัมฤทธิบัตรการออกแบบวิชวลสำหรับสื่อดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
 (6, 'Certificate in Online Content Creation', 'สัมฤทธิบัตรการสร้างสรรค์เนื้อหาออนไลน์', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
-(7, 'Certificate in Modern Software Project Management', 'สัมฤทธิบัตรการจัดการโครงการซอฟต์แวร์สมัยใหม่', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4);
+(7, 'Certificate in Modern Software Project Management', 'สัมฤทธิบัตรการจัดการโครงการซอฟต์แวร์สมัยใหม่', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
+(8, 'Certificate in Comprehensive Research-Oriented Digital Technology', 'สัมฤทธิบัตรเทคโนโลยีดิจิทัลเชิงวิจัยแบบครอบคลุม', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
+(9, 'Certificate in Artificial Intelligence\r\n', 'สัมฤทธิบัตรปัญญาประดิษฐ์\r\n\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
+(10, 'Certificate in Digital Transformation', 'สัมฤทธิบัตรการเปลี่ยนผ่านสู่ดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(11, 'Certificate in Enterprise Information Management\r\n', 'สัมฤทธิบัตรการบริหารจัดการข้อมูลองค์กร', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
+(12, 'Certificate in Knowledge Management', 'สัมฤทธิบัตรการจัดการความรู้\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(13, 'Certificate in Digital Learning', 'สัมฤทธิบัตรการเรียนรู้ดิจิทัล\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(14, 'Certificate in Animation Technology', 'สัมฤทธิบัตรเทคโนโลยีแอนิเมชัน\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(15, 'Certificate in User Interface Design\r\n', 'สัมฤทธิบัตรการออกแบบส่วนต่อประสานกับผู้ใช้', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
+(16, 'Certificate in User Experience Design\r\n', 'สัมฤทธิบัตรการออกแบบประสบการณ์ผู้ใช้\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(17, 'Certificate in Digital Media Business and Entrepreneurs Administration', 'สัมฤทธิบัตรการบริหารธุรกิจสื่อดิจิทัลและผู้ประกอบการ\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 4),
+(18, 'Certificate in Special Modules in Emerging Digital Technology I\r\n', 'สัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 1\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(19, 'Certificate in Special Modules in Emerging Digital Technology II', 'สัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 2\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(20, 'Certificate in Special Modules in Emerging Digital Technology III', 'สัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 3\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(21, 'Certificate in Computer Network and Information Security\r\n', 'สัมฤทธิบัตรการรักษาความมั่นคงปลอดภัยเครือข่ายและสารสนเทศ', 'Certificate-Digitech-TEMPLATE-blank.jpg\r\n', 4),
+(22, 'Certificate in Modern Software Project Management\r\nModule', 'สัมฤทธิบัตรการจัดการโครงการซอฟต์แวร์สมัยใหม่\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(23, 'Certificate in Comprehensive Research-Oriented Digital Technology', 'สัมฤทธิบัตรเทคโนโลยีดิจิทัลเชิงวิจัยแบบครอบคลุม', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(24, 'Certificate in Modern Software Project Management\r\n', 'สัมฤทธิบัตรการจัดการโครงการซอฟต์แวร์สมัยใหม่', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(25, 'Certificate in Mobile Application\r\n', 'สัมฤทธิบัตรโปรแกรมประยุกต์บนอุปกรณ์เคลื่อนที่', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(26, 'Certificate inInternet of Things', 'สัมฤทธิบัตรอินเทอร์เน็ตของสรรพสิ่ง', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(27, 'Certificate in Artificial Intelligence\r\n', 'สัมฤทธิบัตรปัญญาประดิษฐ์\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(28, 'Certificate in Business Insight Analytics\r\n', 'สัมฤทธิบัตรการวิเคราะห์ข้อมูลเชิงลึกทางธุรกิจ\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(29, 'Certificate in Digital Transformation\r\n', 'สัมฤทธิบัตรการเปลี่ยนผ่านสู่ดิจิทัล\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(30, 'Certificate in Enterprise Information Management\r\n', 'สัมฤทธิบัตรการบริหารจัดการข้อมูลองค์กร', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(31, 'Certificate in Knowledge Management', 'สัมฤทธิบัตรการจัดการความรู้\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(32, 'Certificate in Digital Information Management', 'สัมฤทธิบัตรการจัดการสารสนเทศดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(33, 'Certificate in Digital Learning', 'สัมฤทธิบัตรการเรียนรู้ดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(34, 'Certificate in Visual Design for Digital Media\r\n', 'สัมฤทธิบัตรการออกแบบวิชวลสำหรับสื่อดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(35, 'Certificate in Online Content Creation\r\n', 'สัมฤทธิบัตรการสร้างสรรค์เนื้อหาออนไลน์\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(36, 'Certificate in Animation Technology', 'สัมฤทธิบัตรเทคโนโลยีแอนิเมชัน\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(37, 'Certificate in User Interface Design', 'สัมฤทธิบัตรการออกแบบส่วนต่อประสานกับผู้ใช้\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(38, 'Certificate in User Experience Design', 'สัมฤทธิบัตรการออกแบบประสบการณ์ผู้ใช้\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(39, 'Certificate in Digital Media Business and Entrepreneurs Administration\r\n', 'สัมฤทธิบัตรการบริหารธุรกิจสื่อดิจิทัลและผู้ประกอบการ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(40, 'Certificate in Special Modules in Emerging Digital Technology III', 'สัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 3', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(41, 'Certificate in Special Modules in Emerging Digital Technology I\r\n', 'สัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 1\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(42, 'Certificate in Special Modules in Emerging Digital Technology II', 'สัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 2', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(43, 'Certificate in Ph.D. Research-Oriented Digital Technology', 'สัมฤทธิบัตรเทคโนโลยีดิจิทัลเชิงวิจัยสำหรับดุษฎีบัณฑิต', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(44, 'Certificate in Computer Network and Information Security', 'สัมฤทธิบัตรการรักษาความมั่นคงปลอดภัยเครือข่ายและสารสนเทศ\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 5),
+(67, 'Certificate in Digital Technology Administration', 'สัมฤทธิบัตรการบริหารเทคโนโลยีดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(68, 'Certificate in Introduction to Software Developer Professionals', 'สัมฤทธิบัตรความรู้เบื้องต้นเกี่ยวกับวิชาชีพนักพัฒนาซอฟต์แวร์\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(69, 'Certificate in Digital Media and Business', 'สัมฤทธิบัตรสื่อดิจิทัลและธุรกิจ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(70, 'Certificate in Visual Message Design', 'สัมฤทธิบัตรการออกแบบทัศนสาร', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(71, 'Certificate in Transmedia Production', 'สัมฤทธิบัตรการผลิตข้ามสื่อ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(72, 'Certificate in Multimedia and Animation Production', 'สัมฤทธิบัตรการผลิตสื่อประสมและแอนิเมชัน', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(73, 'Certificate in 3D Animation Production', 'สัมฤทธิบัตรการผลิตแอนิเมชัน 3 มิต', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(74, 'Certificate in English for Digital Communication Professionals', 'สัมฤทธิบัตรภาษาอังกฤษสําหรับวิชาชีพนิเทศศาสตร์ดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(75, 'Certificate in Project in Digital Communication', 'สัมฤทธิบัตรโครงงานนิเทศศาสตร์ดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(76, 'Certificate in Digital Content Writing\r\n', 'สัมฤทธิบัตรการเขียนเนื้อหาดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(77, 'Certificate in Digital Marketing Communication', 'สัมฤทธิบัตรการสื่อสารการตลาดดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(78, 'Certificate in User Experience Design', 'สัมฤทธิบัตรการออกแบบประสบการณ์ผู้ใช้', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(79, 'Certificate in Advanced Digital Media Production', 'สัมฤทธิบัตรการผลิตสื่อดิจิทัลขั้นสูง ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(80, 'Certificate in Integrated Digital Media Production', 'สัมฤทธิบัตรการผลิตสื่อดิจิทัลแบบบูรณาการ ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(81, 'Certificate in On-line News Production', 'สัมฤทธิบัตรการผลิตข่าวออนไลน์\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(82, 'Certificate in Object-Oriented Programming and Data Structures', 'สัมฤทธิบัตรการเขียนโปรแกรมเชิงอ็อบเจกตและโครงสร้างข้อมูล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(83, 'Certificate in Computer Game Design and Development', 'สัมฤทธิบัตรการออกแบบและพัฒนาเกมคอมพิวเตอร์\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(84, 'Certificate in Application Development with Scripting Language', 'การพัฒนาโปรแกรมประยุกต์ด้วยภาษาสคริปต์', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(85, 'Certificate in Media Management for Social Engagement', 'สัมฤทธิบัตรการจัดการสื่อเพื่อพันธกิจทางสังคม', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(86, 'Certificate in Human-Centered Digital Media Production', 'สัมฤทธิบัตรการผลิตสื่อดิจิทัลที่มีผู้ใช้เป็นศูนย์กลาง', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(87, 'Certificate in Digital Communication Research', 'สัมฤทธิบัตรการวิจัยทางนิเทศศาสตร์ดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(89, 'Certificate in Introduction to Data Science Professionals ', 'สัมฤทธิบัตรความรู้บื้องต้นเกี่ยวกับวิชาชีพนักวิทยาการข้อมูล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(90, 'Certificate in English for Digital Technology Professionals ', 'สัมฤทธิบัตรภาษาอังกฤษสําหรับวิชาชีพเทคโนโลยีดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(91, 'Certificate in Project in Digital Technology ', 'สัมฤทธิบัตรโครงงานเทคโนโลยีดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 2),
+(92, 'Certificate in User Centered Design for Interactive Technologies ', 'สัมฤทธิบัตรการออกแบบเทคโนโลยีปฏิสัมพันธ์ที่มีผู้ใช้เป็นศูนย์กลาง', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(93, 'Certificate in Cross-Platform Application Development ', 'สัมฤทธิบัตรการพัฒนาโปรแกรมประยุกต์ข้ามแพลตฟอร์ม', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(94, 'Certificate in Android Application Development \r\n', 'สัมฤทธิบัตรการพัฒนาโปรแกรมประยุกต์แอนดรอยด์', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(95, 'Certificate in IOS Application Development ', 'สัมฤทธิบัตรการพัฒนาโปรแกรมประยุกต์ไอโอเอส\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(96, 'Certificate in Internet of Thing', 'สัมฤทธิบัตรอินเทอร์เน็ตของสรรพสิ่ง', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(97, 'Certificate in Information System Analysis and Design ', 'สัมฤทธิบัตรการวิเคราะห์และออกแบบระบบสารสนเทศ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(98, 'Certificate in Software Engineering ', 'สัมฤทธิบัตรวิศวกรรมซอฟต์แวร์\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(99, 'Certificate in Database Administration ', 'สัมฤทธิบัตรการบริหารฐานข้อมูล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(100, 'Certificate in Network Administration', 'สัมฤทธิบัตรการบริหารเครือข่าย\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(101, 'Certificate in System Administration \r\n', 'สัมฤทธิบัตรการบริหารระบบ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(102, 'Certificate in Cyber Security ', 'สัมฤทธิบัตรความมั่นคงปลอดภัยทางไซเบอร์', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(103, 'Certificate in Blockchain and Cryptocurrency', 'สัมฤทธิบัตรบล็อกเชนและสกุลเงินดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(104, 'Certificate in Digital Transformation ', 'สัมฤทธิบัตรการปรับเปลี่ยนองค์กรเข้าสู่ความเป็นดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(105, 'Certificate in Big Data Technology ', 'สัมฤทธิบัตรเทคโนโลยีข้อมูลขนาดใหญ่', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(106, 'Certificate in Data Engineering ', 'สัมฤทธิบัตรวิศวกรรมข้อมูล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(107, 'Certificate in Statistics for Data Analytics ', 'สัมฤทธิบัตรสถิติเพื่อการวิเคราะห์ข้อมูล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(108, 'Certificate in Knowledge Discovery in Database', 'สัมฤทธิบัตรการค้นพบความรู้จากฐานข้อมูล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(109, 'Certificate in Aritificial Intelligence for Data Analytics ', 'สัมฤทธิบัตรปัญญาประดิษฐ์สําหรับการวิเคราะห์ข้อมูล\r\n', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(110, 'Certificate in Business Intelligence and Information Visualization ', 'สัมฤทธิบัตรธุรกิจอัจฉริยะและการจินตทัศน์สารสนเทศ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(111, 'Certificate in Business Insights and Data Analytics ', 'สัมฤทธิบัตรธุรกิจเชิงลึกและการวิเคราะห์ข้อมูล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(112, 'Certificate in Metadata Management ', 'สัมฤทธิบัตรการบริหารจัดการเมทาดาทา', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(113, 'Certificate in Digital Repository and Library Technology ', 'สัมฤทธิบัตรคลังข้อมูลดิจิทัลและเทคโนโลยีห้องสมุด', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(114, 'Certificate in Knowledge Management ', 'สัมฤทธิบัตรการจัดการความรู้', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(115, 'Certificate in Data Curation ', 'สัมฤทธิบัตรการดูแลรักษาข้อมูลดิจิทัล', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(116, 'Certificate in Information Organization and Analysis ', 'สัมฤทธิบัตรการจัดระบบและการวิเคราะห์สารสนเทศ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(117, 'Certificate in Information Service Management ', 'สัมฤทธิบัตรการจัดการบริการสารสนเทศ', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3),
+(118, 'Certificate in Office Information Management', 'สัมฤทธิบัตรการจัดการสารสนเทศสํานักงาน', 'Certificate-Digitech-TEMPLATE-blank.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -867,13 +956,13 @@ INSERT INTO `cert` (`cert_id`, `cert_name_en`, `cert_name_th`, `cert_img`, `cert
 -- Table structure for table `cert_of_student`
 --
 
-CREATE TABLE IF NOT EXISTS `cert_of_student` (
+CREATE TABLE `cert_of_student` (
   `id` bigint(20) NOT NULL,
   `std_id` varchar(11) NOT NULL,
   `cert_id` bigint(20) NOT NULL,
   `cert_approve` varchar(100) NOT NULL DEFAULT 'Digitech @ SUT',
   `cert_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cert_of_student`
@@ -949,11 +1038,11 @@ INSERT INTO `cert_of_student` (`id`, `std_id`, `cert_id`, `cert_approve`, `cert_
 -- Table structure for table `cert_type`
 --
 
-CREATE TABLE IF NOT EXISTS `cert_type` (
+CREATE TABLE `cert_type` (
   `id` int(11) NOT NULL,
   `cert_type_name` varchar(50) NOT NULL,
   `badge_img_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `cert_type`
@@ -972,7 +1061,7 @@ INSERT INTO `cert_type` (`id`, `cert_type_name`, `badge_img_id`) VALUES
 -- Table structure for table `course`
 --
 
-CREATE TABLE IF NOT EXISTS `course` (
+CREATE TABLE `course` (
   `course_id` bigint(20) NOT NULL,
   `course_name_th` varchar(100) DEFAULT NULL,
   `course_name_en` varchar(100) NOT NULL,
@@ -1024,12 +1113,12 @@ INSERT INTO `course` (`course_id`, `course_name_th`, `course_name_en`, `course_d
 -- Table structure for table `course_of_program`
 --
 
-CREATE TABLE IF NOT EXISTS `course_of_program` (
+CREATE TABLE `course_of_program` (
   `id` int(11) NOT NULL,
   `program_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `course_order` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `course_of_program`
@@ -1072,13 +1161,13 @@ INSERT INTO `course_of_program` (`id`, `program_id`, `course_id`, `course_order`
 -- Table structure for table `diploma`
 --
 
-CREATE TABLE IF NOT EXISTS `diploma` (
+CREATE TABLE `diploma` (
   `id` bigint(20) NOT NULL,
   `std_id` varchar(11) NOT NULL,
   `program_id` bigint(20) NOT NULL,
   `diploma_approve` varchar(100) NOT NULL,
   `diploma_date` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `diploma`
@@ -1178,13 +1267,13 @@ INSERT INTO `diploma` (`id`, `std_id`, `program_id`, `diploma_approve`, `diploma
 -- Table structure for table `enroll`
 --
 
-CREATE TABLE IF NOT EXISTS `enroll` (
+CREATE TABLE `enroll` (
   `enroll_id` bigint(20) NOT NULL,
   `std_id` varchar(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `practice_score` decimal(10,2) DEFAULT 0.00,
   `objective_score` decimal(10,2) DEFAULT 0.00
-) ENGINE=InnoDB AUTO_INCREMENT=917 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `enroll`
@@ -2104,16 +2193,282 @@ INSERT INTO `enroll` (`enroll_id`, `std_id`, `course_id`, `practice_score`, `obj
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `module`
+--
+
+CREATE TABLE `module` (
+  `id` int(11) NOT NULL,
+  `module_id` varchar(7) NOT NULL,
+  `module_name_en` varchar(200) NOT NULL,
+  `module_name_th` varchar(200) NOT NULL,
+  `module_detail_en` text DEFAULT NULL,
+  `module_detail_th` text DEFAULT NULL,
+  `module_credit` int(11) NOT NULL,
+  `type_of_course` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `module`
+--
+
+INSERT INTO `module` (`id`, `module_id`, `module_name_en`, `module_name_th`, `module_detail_en`, `module_detail_th`, `module_credit`, `type_of_course`) VALUES
+(1, '1101010', 'Digital Technology Administration Module', 'ชุดวิชาการบริหารเทคโนโลยีดิจิทัล', '', '', 8, '4'),
+(2, '1101020', 'Introduction to Software Developer Professionals Module', 'ชุดวิชาความรู้เบื้องต้นเกี่ยวกับวิชาชีพนักพัฒนาซอฟต์แวร์', '', '', 8, '4'),
+(3, '1102010', 'Digital Media and Business Module', 'ชุดวิชาสื่อดิจิทัลและธุรกิจ', '', '', 8, '4'),
+(4, '1101060', 'Visual Message Design Module', 'ชุดวิชาการออกแบบทัศนสาร', '', '', 8, '4'),
+(5, '1102030', 'Transmedia Production Module', 'ชุดวิชาการผลิตข้ามสื่อ', '', '', 8, '4'),
+(6, '1102020', 'Multimedia and Animation Production Module', 'ชุดวิชาการผลิตสื่อประสมและแอนิเมชัน', '', '', 8, '4'),
+(7, '1102040', '3D Animation Production Module', 'ชุดวิชาการผลิตแอนิเมชัน 3 มิติ', '', '', 8, '4'),
+(8, '1102050', 'English for Digital Communication Professionals Module', 'ชุดวิชาภาษาอังกฤษสำหรับวิชาชีพนิเทศศาสตร์ดิจิทัล', '', '', 8, '4'),
+(9, '1102910', 'Project in Digital Communication Module', 'ชุดวิชาโครงงานนิเทศศาสตร์ดิจิทัล', '', '', 8, '4'),
+(10, '1101050', 'Digital Content Writing Module', 'ชุดวิชาการเขียนเนื้อหาดิจิทัล', '', '', 8, '5'),
+(11, '1102070', 'Digital Marketing Communication Module)', 'ชุดวิชาการสื่อสารการตลาดดิจิทัล', '', '', 8, '5'),
+(12, '1101070', 'User Experience Design Module', 'ชุดวิชาการออกแบบประสบการณ์ผู้ใช้', '', '', 8, '5'),
+(13, '1102080', 'Advanced Digital Media Production Module', 'ชุดวิชาการผลิตสื่อดิจิทัลขั้นสูง', '', '', 8, '5'),
+(14, '1102090', 'Integrated Digital Media Production Module', 'ชุดวิชาการผลิตสื่อดิจิทัลแบบบูรณาการ', '', '', 8, '5'),
+(15, '1102100', 'On-line News Production Module', 'ชุดวิชาการผลิตข่าวออนไลน์', '', '', 8, '5'),
+(16, '1101090', 'Object-Oriented Programming and Data Structures Module', 'ชุดวิชาการเขียนโปรแกรมเชิงอ็อบเจกต์และโครงสร้างข้อมูล', '', '', 8, '5'),
+(17, '1102110', 'Computer Game Design and Development Module', 'ชุดวิชาการออกแบบและพัฒนาเกมคอมพิวเตอร์', '', '', 8, '5'),
+(18, '1101100', 'Application Development with Scripting Language Module', 'ชุดวิชาการพัฒนาโปรแกรมประยุกต์ด้วยภาษาสคริปต์', '', '', 8, '5'),
+(19, '1102120', 'Media Management for Social Engagement Module', 'ชุดวิชาการจัดการสื่อเพื่อพันธกิจทางสังคม', '', '', 8, '5'),
+(20, '1102130', 'Human-Centered Digital Media Production Module', 'ชุดวิชาการผลิตสื่อดิจิทัลที่มีผู้ใช้เป็นศูนย์กลาง', '', '', 8, '5'),
+(21, '1102140', 'Digital Communication Research Module', 'ชุดวิชาการวิจัยทางนิเทศศาสตร์ดิจิทัล', '', '', 8, '5'),
+(22, '1102150', 'Emerging Digital Media Module', 'ชุดวิชาสื่อดิจิทัลอุบัติใหม่', '', '', 8, '5'),
+(23, '1102160', 'Digital Media Innovation Module', 'ชุดวิชานวัตกรรมสื่อดิจิทัล', '', '', 8, '5'),
+(31, '1101140', 'Internet of Things Module', 'ชุดวิชาอินเทอร์เน็ตของสรรพสิ่ง', '', '', 8, '5'),
+(71, '1101030', 'Introduction to Data Science Professionals Module', 'ชุดวิชาความรู้เบื้องต้นเกี่ยวกับวิชาชีพนักวิทยาการข้อมูล', '', '', 8, '4'),
+(72, '1101040', 'English for Digital Technology Professionals Module', 'ชุดวิชาภาษาอังกฤษสำหรับวิชาชีพเทคโนโลยีดิจิทัล', '', '', 8, '4'),
+(73, '1101910', 'Project in Digital Technology Module', 'ชุดวิชาโครงงานเทคโนโลยีดิจิทัล', '', '', 8, '4'),
+(74, '1101080', 'User Centered Design for Interactive Technologies Module', 'ชุดวิชาการออกแบบเทคโนโลยีปฏิสัมพันธ์ที่มีผู้ใช้เป็นศูนย์กลาง', '', '', 8, '5'),
+(75, '1101110', 'Cross-Platform Application Development', 'ชุดวิชาการพัฒนาโปรแกรมประยุกต์ข้ามแพลตฟอร์ม', '', '', 8, '5'),
+(76, '1101120', 'Android Application Development Module', 'ชุดวิชาการพัฒนาโปรแกรมประยุกต์แอนดรอยด์', '', '', 8, '5'),
+(77, '1101130', 'IOS Application Development Module', 'ชุดวิชาการพัฒนาโปรแกรมประยุกต์ไอโอเอส', '', '', 8, '5'),
+(78, '1101150', 'Information System Analysis and Design Module', 'ชุดวิชาการวิเคราะห์และออกแบบระบบสารสนเทศ', '', '', 8, '5'),
+(79, '1101160', 'Software Engineering Module', 'ชุดวิชาวิศวกรรมซอฟต์แวร์', '', '', 8, '5'),
+(80, '1101170', 'Database Administration Module', 'ชุดวิชาการบริหารฐานข้อมูล', '', '', 8, '5'),
+(81, '1101180', 'Network Administration Module', 'ชุดวิชาการบริหารเครือข่าย', '', '', 8, '5'),
+(82, '1101190', 'System Administration Module', 'ชุดวิชาการบริหารระบบ', '', '', 8, '5'),
+(83, '1101200', 'Cyber Security Module', 'ชุดวิชาความมั่นคงปลอดภัยทางไซเบอร์', '', '', 8, '5'),
+(84, '1101210', 'Blockchain and Cryptocurrency Module', 'ชุดวิชาบล็อกเชนและสกุลเงินดิจิทัล', '', '', 8, '5'),
+(85, '1101220', 'Digital Transformation Module', 'ชุดวิชาการปรับเปลี่ยนองค์กรเข้าสู่ความเป็นดิจิทัล', '', '', 8, '5'),
+(86, '1101230', 'Big Data Technology Module', 'ชุดวิชาเทคโนโลยีข้อมูลขนาดใหญ่', '', '', 8, '5'),
+(87, '1101240', 'Data Engineering Module', 'ชุดวิชาวิศวกรรมข้อมูล', '', '', 8, '5'),
+(88, '1101250', 'Statistics for Data Analytics Module', 'ชุดวิชาสถิติเพื่อการวิเคราะห์ข้อมูล', '', '', 8, '5'),
+(89, '1101260', 'Knowledge Discovery in Database Module', 'ชุดวิชาค้นพบความรู้จากฐานข้อมูล', '', '', 8, '5'),
+(90, '1101270', 'Artificial Intelligence for Data Analytics Module', 'ชุดวิชาปัญญาประดิษฐ์สำหรับการวิเคราะห์ข้อมูล', '', '', 8, '5'),
+(91, '1101280', 'Business Intelligence and Information Visualization Module', 'ชุดวิชาธุรกิจอัจฉริยะและการจินตทัศน์สารสนเทศ', '', '', 8, '5'),
+(92, '1101290', 'Business Insights and Data Analytics Module', 'ชุดวิชาธุรกิจเชิงลึกและการวิเคราะห์ข้อมูล', '', '', 8, '5'),
+(93, '1101300', 'Metadata Management Module', 'ชุดวิชาการบริหารจัดการเมทาดาทา', '', '', 8, '5'),
+(94, '1101310', 'Digital Repository and Library Technology Module', 'ชุดวิชาคลังข้อมูลดิจิทัลและเทคโนโลยีห้องสมุด', '', '', 8, '5'),
+(95, '1101320', 'Knowledge Management Module', 'ชุดวิชาการจัดการความรู้', '', '', 8, '5'),
+(96, '1101330', 'Data Curation Module', 'ชุดวิชาการดูแลรักษาข้อมูลดิจิทัล', '', '', 8, '5'),
+(97, '1101340', 'Information Organization and Analysis Module', 'ชุดวิชาการจัดระบบและการวิเคราะห์สารสนเทศ', '', '', 8, '5'),
+(98, '1101350', 'Information Service Management Module', 'ชุดวิชาการจัดการบริการสารสนเทศ', '', '', 8, '5'),
+(99, '1101360', 'Office Information Management Module', 'ชุดวิชาการจัดการสารสนเทศสำนักงาน', '', '', 8, '5'),
+(100, '1101370', 'Special Modules in Digital Technology I Module', 'ชุดวิชาพิเศษเกี่ยวกับเทคโนโลยีดิจิทัล 1', '', '', 8, '5'),
+(101, '1101380', 'Special Modules in Digital Technology II Module', 'ชุดวิชาพิเศษเกี่ยวกับเทคโนโลยีดิจิทัล 2', '', '', 8, '5'),
+(102, '1101390', 'Special Modules in Digital Technology III Module', 'ชุดวิชาพิเศษเกี่ยวกับเทคโนโลยีดิจิทัล 3', '', '', 8, '5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `module_of_course`
+--
+
+CREATE TABLE `module_of_course` (
+  `id` int(11) NOT NULL,
+  `module_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `module_of_course`
+--
+
+INSERT INTO `module_of_course` (`id`, `module_id`, `course_id`) VALUES
+(1, 1, 20),
+(2, 1, 21),
+(3, 1, 22),
+(7, 3, 26),
+(8, 3, 27),
+(9, 3, 28),
+(10, 4, 29),
+(11, 4, 30),
+(12, 4, 31),
+(13, 5, 32),
+(14, 5, 33),
+(15, 5, 34),
+(16, 6, 35),
+(17, 6, 36),
+(18, 6, 37),
+(19, 7, 38),
+(20, 7, 39),
+(21, 7, 40),
+(22, 8, 41),
+(23, 8, 42),
+(24, 8, 43),
+(25, 9, 44),
+(26, 9, 45),
+(27, 9, 46),
+(28, 10, 47),
+(29, 10, 48),
+(30, 10, 49),
+(31, 11, 50),
+(32, 11, 51),
+(33, 11, 52),
+(34, 12, 53),
+(35, 12, 54),
+(36, 12, 55),
+(37, 13, 56),
+(38, 13, 57),
+(39, 13, 58),
+(40, 14, 59),
+(41, 14, 60),
+(42, 14, 61),
+(43, 15, 62),
+(44, 15, 63),
+(45, 15, 64),
+(46, 16, 65),
+(47, 16, 66),
+(48, 16, 67),
+(49, 17, 68),
+(50, 17, 69),
+(51, 17, 70),
+(52, 18, 71),
+(53, 18, 72),
+(54, 18, 73),
+(55, 19, 74),
+(56, 19, 75),
+(57, 19, 76),
+(58, 20, 77),
+(59, 20, 78),
+(60, 20, 79),
+(61, 21, 80),
+(62, 21, 81),
+(63, 21, 82),
+(64, 22, 83),
+(65, 22, 84),
+(66, 22, 85),
+(67, 23, 86),
+(68, 23, 87),
+(69, 23, 88),
+(73, 2, 23),
+(74, 2, 24),
+(75, 2, 25),
+(84, 30, 1),
+(85, 31, 121),
+(86, 31, 122),
+(87, 31, 123),
+(88, 71, 124),
+(89, 71, 125),
+(90, 71, 126),
+(91, 72, 127),
+(92, 72, 128),
+(93, 72, 129),
+(94, 73, 130),
+(95, 73, 131),
+(96, 73, 132),
+(97, 74, 133),
+(98, 74, 134),
+(99, 74, 135),
+(100, 75, 136),
+(101, 75, 137),
+(102, 75, 138),
+(103, 76, 139),
+(104, 76, 140),
+(105, 76, 141),
+(106, 77, 142),
+(107, 77, 143),
+(108, 77, 144),
+(109, 78, 145),
+(110, 78, 146),
+(111, 78, 147),
+(112, 79, 148),
+(113, 79, 149),
+(114, 79, 150),
+(115, 80, 151),
+(116, 80, 152),
+(117, 80, 153),
+(118, 81, 154),
+(119, 81, 155),
+(120, 81, 156),
+(121, 82, 157),
+(122, 82, 158),
+(123, 82, 159),
+(124, 83, 160),
+(125, 83, 161),
+(126, 83, 162),
+(127, 84, 163),
+(128, 84, 164),
+(129, 84, 165),
+(130, 85, 166),
+(131, 85, 167),
+(132, 85, 168),
+(133, 86, 169),
+(134, 86, 170),
+(135, 86, 171),
+(136, 87, 172),
+(137, 87, 173),
+(138, 87, 174),
+(139, 88, 175),
+(140, 88, 176),
+(141, 88, 177),
+(142, 89, 178),
+(143, 89, 179),
+(144, 89, 180),
+(145, 90, 181),
+(146, 90, 182),
+(147, 90, 183),
+(148, 91, 184),
+(149, 91, 185),
+(150, 91, 186),
+(151, 92, 187),
+(152, 92, 188),
+(153, 92, 189),
+(154, 93, 190),
+(155, 93, 191),
+(156, 93, 192),
+(157, 94, 193),
+(158, 94, 194),
+(159, 94, 195),
+(160, 95, 196),
+(161, 95, 197),
+(162, 95, 198),
+(163, 96, 199),
+(164, 96, 200),
+(165, 96, 201),
+(166, 97, 202),
+(167, 97, 203),
+(168, 97, 204),
+(169, 98, 205),
+(170, 98, 206),
+(171, 98, 207),
+(172, 99, 208),
+(173, 99, 209),
+(174, 99, 210),
+(175, 100, 211),
+(176, 100, 212),
+(177, 100, 213),
+(178, 101, 214),
+(179, 101, 215),
+(180, 101, 216),
+(181, 102, 217),
+(182, 102, 218),
+(183, 102, 219);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `program`
 --
 
-CREATE TABLE IF NOT EXISTS `program` (
+CREATE TABLE `program` (
   `program_id` int(11) NOT NULL,
   `program_name_th` varchar(500) NOT NULL,
   `program_name_en` varchar(500) NOT NULL,
   `program_objective` text NOT NULL,
   `cert_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `program`
@@ -2126,7 +2481,95 @@ INSERT INTO `program` (`program_id`, `program_name_th`, `program_name_en`, `prog
 (4, 'หลักสูตรสัมฤทธิบัตรการจัดการสารสนเทศดิจิทัล', 'Certificate Program in Digital Information Management', '1)	เพื่อผลิตบัณฑิตที่มีความรู้ ความสามารถ และทักษะในการออกแบบ การพัฒนา การจัดระบบ และการสงวนรักษาสารสนเทศดิจิทัลได้\n2)	เพื่อผลิตบัณฑิตที่รู้ชัดปฏิบัติได้ในวิชาชีพด้านการจัดการสารสนเทศดิจิทัล\n3)	เพื่อตอบสนองความต้องการกำลังคนทางด้านเทคโนโลยีดิจิทัลของหน่วยงานภาครัฐ ภาคเอกชน และการประกอบอาชีพอิสระได้ ', 4),
 (5, 'หลักสูตรสัมฤทธิบัตรการออกแบบวิชวลสำหรับสื่อดิจิทัล', 'Certificate Program in Visual Design for Digital Media', '1)	เพื่อผลิตบัณฑิตที่มีความรู้ ความสามารถ และทักษะในการออกแบบวิชวลสำหรับสื่อดิจิทัล\r\n2)	เพื่อผลิตบัณฑิตที่รู้ชัดปฏิบัติได้ มีความเชี่ยวชาญเฉพาะทางในวิชาชีพด้านการออกแบบวิชวลสำหรับสื่อดิจิทัล\r\n3)	เพื่อผลิตบัณฑิตที่มีคุณภาพ ยึดมั่นในคุณธรรมและจรรยาบรรณแห่งวิชาชีพ และสามารถประกอบวิชาชีพด้านการออกแบบวิชวลสำหรับสื่อดิจิทัลได้อย่างมีประสิทธิภาพ', 5),
 (6, 'หลักสูตรสัมฤทธิบัตรการสร้างสรรค์เนื้อหาออนไลน์', 'Certificate Program in Online Content Creation', '1)	เพื่อผลิตบัณฑิตที่มีความรู้ ความสามารถ และทักษะในการสร้างสรรค์เนื้อหาออนไลน์\r\n2)	เพื่อผลิตบัณฑิตที่ความเชี่ยวชาญเฉพาะทางในวิชาชีพด้านการสร้างสรรค์เนื้อหาออนไลน์\r\n3)	เพื่อผลิตบัณฑิตที่มีคุณภาพ ยึดมั่นในคุณธรรมและจรรยาบรรณแห่งวิชาชีพ และสามารถประกอบวิชาชีพด้านการสร้างสรรค์และเผยแพร่เนื้อหาออนไลน์', 6),
-(7, 'หลักสูตรสัมฤทธิบัตรการจัดการโครงการซอฟต์แวร์สมัยใหม่', 'Certificate Program in Modern Software Project Management', '1)	เพื่อผลิตบัณฑิตที่มีความรู้ ความสามารถ และทักษะในการจัดการโครงการซอฟต์แวร์ด้วยเทคนิคและวิธีการสมัยใหม่\r\n2)	เพื่อผลิตบัณฑิตที่รู้ชัดปฏิบัติได้ในวิชาชีพด้านการจัดการโครงการซอฟต์แวร์\r\n3)	เพื่อตอบสนองความต้องการกำลังคนทางด้านเทคโนโลยีดิจิทัลของหน่วยงานภาครัฐ ภาคเอกชน และการประกอบอาชีพอิสระได้\r\n', 7);
+(7, 'หลักสูตรสัมฤทธิบัตรการจัดการโครงการซอฟต์แวร์สมัยใหม่', 'Certificate Program in Modern Software Project Management', '1)	เพื่อผลิตบัณฑิตที่มีความรู้ ความสามารถ และทักษะในการจัดการโครงการซอฟต์แวร์ด้วยเทคนิคและวิธีการสมัยใหม่\r\n2)	เพื่อผลิตบัณฑิตที่รู้ชัดปฏิบัติได้ในวิชาชีพด้านการจัดการโครงการซอฟต์แวร์\r\n3)	เพื่อตอบสนองความต้องการกำลังคนทางด้านเทคโนโลยีดิจิทัลของหน่วยงานภาครัฐ ภาคเอกชน และการประกอบอาชีพอิสระได้\r\n', 7),
+(8, 'หลักสูตรสัมฤทธิบัตรเทคโนโลยีดิจิทัลเชิงวิจัยแบบครอบคลุม', 'Certificate in Comprehensive Research-Oriented Digital Technology', '', 8),
+(9, 'หลักสูตรสัมฤทธิบัตรปัญญาประดิษฐ์', 'Certificate in Artificial Intelligence', '', 9),
+(10, 'หลักสูตรสัมฤทธิบัตรการเปลี่ยนผ่านสู่ดิจิทัล', 'Certificate in Digital Transformation', '', 10),
+(11, 'หลักสูตรสัมฤทธิบัตรการบริหารจัดการข้อมูลองค์กร', 'Certificate in Enterprise Information Management', '', 11),
+(12, 'หลักสูตรสัมฤทธิบัตรการจัดการความรู้', 'Certificate in Knowledge Management', '', 12),
+(13, 'หลักสูตรสัมฤทธิบัตรการเรียนรู้ดิจิทัล', 'Certificate in Digital Learning', '', 13),
+(14, 'หลักสูตรสัมฤทธิบัตรเทคโนโลยีแอนิเมชัน', 'Certificate in Animation Technology', '', 14),
+(15, 'หลักสูตรสัมฤทธิบัตรการออกแบบส่วนต่อประสานกับผู้ใช้', 'Certificate in User Interface Design', '', 15),
+(16, 'หลักสูตรสัมฤทธิบัตรการออกแบบประสบการณ์ผู้ใช้', 'Certificate in User Experience Design', '', 16),
+(17, 'หลักสูตรสัมฤทธิบัตรการบริหารธุรกิจสื่อดิจิทัลและผู้ประกอบการ', 'Certificate in Digital Media Business and Entrepreneurs Administration', '', 17),
+(18, 'หลักสูตรสัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 1', 'Certificate in Special Modules in Emerging Digital Technology I', '', 18),
+(19, 'หลักสูตรสัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 2', 'Certificate in Special Modules in Emerging Digital Technology II', '', 19),
+(20, 'หลักสูตรสัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 3', 'Certificate in Special Modules in Emerging Digital Technology III', '', 20),
+(21, 'หลักสูตรสัมฤทธิบัตรการรักษาความมั่นคงปลอดภัยเครือข่ายและสารสนเทศ', 'Certificate in Computer Network and Information Security', '', 21),
+(22, 'หลักสูตรสัมฤทธิบัตรการจัดการโครงการซอฟต์แวร์สมัยใหม่', 'Certificate in Modern Software Project Management\r\nModule', '', 22),
+(23, 'หลักสูตรสัมฤทธิบัตรเทคโนโลยีดิจิทัลเชิงวิจัยแบบครอบคลุม', 'Certificate in Comprehensive Research-Oriented Digital Technology', '', 23),
+(24, 'หลักสูตรสัมฤทธิบัตรการจัดการโครงการซอฟต์แวร์สมัยใหม่', 'Certificate in Modern Software Project Management', '', 24),
+(25, 'หลักสูตรสัมฤทธิบัตรโปรแกรมประยุกต์บนอุปกรณ์เคลื่อนที่', 'Certificate in Mobile Application', '', 25),
+(26, 'หลักสูตรสัมฤทธิบัตรอินเทอร์เน็ตของสรรพสิ่ง', 'Certificate inInternet of Things', '', 26),
+(27, 'หลักสูตรสัมฤทธิบัตรปัญญาประดิษฐ์', 'Certificate in Artificial Intelligence', '', 27),
+(28, 'หลักสูตรสัมฤทธิบัตรการวิเคราะห์ข้อมูลเชิงลึกทางธุรกิจ\r\n', 'Certificate in Business Insight Analytics\r\n', '', 28),
+(29, 'หลักสูตรสัมฤทธิบัตรการเปลี่ยนผ่านสู่ดิจิทัล\r\n', 'Certificate in Digital Transformation', '', 29),
+(30, 'หลักสูตรสัมฤทธิบัตรการบริหารจัดการข้อมูลองค์กร', 'Certificate in Enterprise Information Management', '', 30),
+(31, 'หลักสูตรสัมฤทธิบัตรการจัดการความรู้', 'Certificate in Knowledge Management', '', 31),
+(32, 'หลักสูตรสัมฤทธิบัตรการจัดการสารสนเทศดิจิทัล', 'Certificate in Digital Information Management', '', 32),
+(33, 'หลักสูตรสัมฤทธิบัตรการเรียนรู้ดิจิทัล', 'Certificate in Digital Learning', '', 33),
+(34, 'หลักสูตรสัมฤทธิบัตรการออกแบบวิชวลสำหรับสื่อดิจิทัล', 'Certificate in Visual Design for Digital Media\r\n', '', 34),
+(35, 'สัมฤทธิบัตรการสร้างสรรค์เนื้อหาออนไลน์\r\n', 'Certificate in Online Content Creation\r\n', '', 35),
+(36, 'หลักสูตรสัมฤทธิบัตรเทคโนโลยีแอนิเมชัน', 'Certificate in Animation Technology', '', 36),
+(37, 'หลักสูตรสัมฤทธิบัตรการออกแบบส่วนต่อประสานกับผู้ใช้\r\n', 'Certificate in User Interface Design', '', 37),
+(38, 'หลักสูตรสัมฤทธิบัตรการออกแบบประสบการณ์ผู้ใช้', 'Certificate in User Experience Design', '', 38),
+(39, 'สัมฤทธิบัตรการบริหารธุรกิจสื่อดิจิทัลและผู้ประกอบการ', 'Certificate in Digital Media Business and Entrepreneurs Administration', '', 39),
+(40, 'หลักสูตรสัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 3', 'Certificate in Special Modules in Emerging Digital Technology III', '', 40),
+(41, 'หลักสูตรสัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 1', 'Certificate in Special Modules in Emerging Digital Technology I\r\n', '', 41),
+(42, 'หลักสูตรสัมฤทธิบัตรพิเศษเกี่ยวกับเทคโนโลยีดิจิทัลอุบัติใหม่ 2', 'Certificate in Special Modules in Emerging Digital Technology II', '', 42),
+(43, 'หลักสูตรสัมฤทธิบัตรเทคโนโลยีดิจิทัลเชิงวิจัยสำหรับดุษฎีบัณฑิต', 'Certificate in Ph.D. Research-Oriented Digital Technology', '', 43),
+(44, 'หลักสูตรสัมฤทธิบัตรการรักษาความมั่นคงปลอดภัยเครือข่ายและสารสนเทศ\r\n', 'Certificate in Computer Network and Information Security', '', 44),
+(67, 'หลักสูตรสัมฤทธิบัตรการบริหารเทคโนโลยีดิจิทัล', 'Certificate in Digital Technology Administration', '', 67),
+(68, 'หลักสูตรสัมฤทธิบัตรความรู้เบื้องต้นเกี่ยวกับวิชาชีพนักพัฒนาซอฟต์แวร์\r\n', 'Certificate in Introduction to Software Developer Professionals', '', 68),
+(69, 'หลักสูตรสัมฤทธิบัตรสื่อดิจิทัลและธุรกิจ', 'Certificate in Digital Media and Business', '', 69),
+(70, 'หลักสูตรสัมฤทธิบัตรการออกแบบทัศนสาร', 'Certificate in Visual Message Design', '', 70),
+(71, 'หลักสูตรสัมฤทธิบัตรการผลิตข้ามสื่อ', 'Certificate in Transmedia Production', '', 71),
+(72, 'หลักสูตรสัมฤทธิบัตรการผลิตสื่อประสมและแอนิเมชัน', 'Certificate in Multimedia and Animation Production', '', 72),
+(73, 'หลักสูตรสัมฤทธิบัตรการผลิตแอนิเมชัน 3 มิต', 'Certificate in 3D Animation Production', '', 73),
+(74, 'หลักสูตรสัมฤทธิบัตรภาษาอังกฤษสําหรับวิชาชีพนิเทศศาสตร์ดิจิทัล', 'Certificate in English for Digital Communication Professionals', '', 74),
+(75, 'หละักสูตรสัมฤทธิบัตรโครงงานนิเทศศาสตร์ดิจิทัล', 'Certificate in Project in Digital Communication', '', 75),
+(76, 'หลักสูตรสัมฤทธิบัตรการเขียนเนื้อหาดิจิทัล', 'Certificate in Digital Content Writing', '', 76),
+(77, 'หลักสูตรสัมฤทธิบัตรการสื่อสารการตลาดดิจิทัล', 'Certificate in Digital Marketing Communication', '', 77),
+(78, 'หลักสูตรสัมฤทธิบัตรการออกแบบประสบการณ์ผู้ใช้', 'Certificate in User Experience Design', '', 78),
+(79, 'หลักสูตรสัมฤทธิบัตรการผลิตสื่อดิจิทัลขั้นสูง ', 'Certificate in Advanced Digital Media Production', '', 79),
+(80, 'หลักสูตรสัมฤทธิบัตรการผลิตสื่อดิจิทัลแบบบูรณาการ ', 'Certificate in Integrated Digital Media Production', '', 80),
+(81, 'หลักสูตรสัมฤทธิบัตรการผลิตข่าวออนไลน์', 'Certificate in On-line News Production', '', 81),
+(82, 'หลักสูตรสัมฤทธิบัตรการเขียนโปรแกรมเชิงอ็อบเจกตและโครงสร้างข้อมูล', 'Certificate in Object-Oriented Programming and Data Structures', '', 82),
+(83, 'หลักสูตรสัมฤทธิบัตรการออกแบบและพัฒนาเกมคอมพิวเตอร์', 'Certificate in Computer Game Design and Development', '', 83),
+(84, 'หลักสูตรการพัฒนาโปรแกรมประยุกต์ด้วยภาษาสคริปต์', 'Certificate in Application Development with Scripting Language', '', 84),
+(85, 'หลักสูตรสัมฤทธิบัตรการจัดการสื่อเพื่อพันธกิจทางสังคม', 'Certificate in Media Management for Social Engagement', '', 85),
+(86, 'หลักสูตรสัมฤทธิบัตรการผลิตสื่อดิจิทัลที่มีผู้ใช้เป็นศูนย์กลาง', 'Certificate in Human-Centered Digital Media Production', '', 86),
+(87, 'หลักสูตรสัมฤทธิบัตรการวิจัยทางนิเทศศาสตร์ดิจิทัล', 'Certificate in Digital Communication Research', '', 87),
+(89, 'หลักสูตรสัมฤทธิบัตรความรู้บื้องต้นเกี่ยวกับวิชาชีพนักวิทยาการข้อมูล', 'Certificate in Introduction to Data Science Professionals ', '', 89),
+(90, 'หลักสูตรสัมฤทธิบัตรภาษาอังกฤษสําหรับวิชาชีพเทคโนโลยีดิจิทัล', 'Certificate in English for Digital Technology Professionals ', '', 90),
+(91, 'หลักสูตรสัมฤทธิบัตรโครงงานเทคโนโลยีดิจิทัล', 'Certificate in Project in Digital Technology ', '', 91),
+(92, 'หลักสูตรสัมฤทธิบัตรการออกแบบเทคโนโลยีปฏิสัมพันธ์ที่มีผู้ใช้เป็นศูนย์กลาง', 'Certificate in User Centered Design for Interactive Technologies ', '', 92),
+(93, 'หลักสูตรสัมฤทธิบัตรการพัฒนาโปรแกรมประยุกต์ข้ามแพลตฟอร์ม', 'Certificate in Cross-Platform Application Development ', '', 93),
+(94, 'หลักสูตรสัมฤทธิบัตรการพัฒนาโปรแกรมประยุกต์แอนดรอยด์', 'Certificate in Android Application Development \r\n', '', 94),
+(95, 'หลักสูตรสัมฤทธิบัตรการพัฒนาโปรแกรมประยุกต์ไอโอเอส\r\n', 'Certificate in IOS Application Development ', '', 95),
+(96, 'หลักสูตรสัมฤทธิบัตรอินเทอร์เน็ตของสรรพสิ่ง', 'Certificate in Internet of Thing', '', 96),
+(97, 'หลักสูตรสัมฤทธิบัตรการวิเคราะห์และออกแบบระบบสารสนเทศ', 'Certificate in Information System Analysis and Design ', '', 97),
+(98, 'หลักสูตรสัมฤทธิบัตรวิศวกรรมซอฟต์แวร์\r\n', 'Certificate in Software Engineering ', '', 98),
+(99, 'หลักสูตรสัมฤทธิบัตรการบริหารฐานข้อมูล', 'Certificate in Database Administration ', '', 99),
+(100, 'หลักสูตรสัมฤทธิบัตรการบริหารเครือข่าย', 'Certificate in Network Administration', '', 100),
+(101, 'หลักสูตรสัมฤทธิบัตรการบริหารระบบ', 'Certificate in System Administration ', '', 101),
+(102, 'หลักสูตรสัมฤทธิบัตรความมั่นคงปลอดภัยทางไซเบอร์', 'Certificate in Cyber Security ', '', 102),
+(103, 'หลักสูตรสัมฤทธิบัตรบล็อกเชนและสกุลเงินดิจิทัล', 'Certificate in Blockchain and Cryptocurrency', '', 103),
+(104, 'หลักสูตรสัมฤทธิบัตรการปรับเปลี่ยนองค์กรเข้าสู่ความเป็นดิจิทัล', 'Certificate in Digital Transformation ', '', 104),
+(105, 'หลักสูตรสัมฤทธิบัตรเทคโนโลยีข้อมูลขนาดใหญ่', 'Certificate in Big Data Technology ', '', 105),
+(106, 'หลักสูตรสัมฤทธิบัตรวิศวกรรมข้อมูล', 'Certificate in Data Engineering ', '', 106),
+(107, 'หลักสูตรสัมฤทธิบัตรสถิติเพื่อการวิเคราะห์ข้อมูล', 'Certificate in Statistics for Data Analytics ', '', 107),
+(108, 'หลักสูตรสัมฤทธิบัตรการค้นพบความรู้จากฐานข้อมูล', 'Certificate in Knowledge Discovery in Database', '', 108),
+(109, 'หลักสูตรสัมฤทธิบัตรปัญญาประดิษฐ์สําหรับการวิเคราะห์ข้อมูล\r\n', 'Certificate in Aritificial Intelligence for Data Analytics ', '', 109),
+(110, 'หลักสูตรสัมฤทธิบัตรธุรกิจอัจฉริยะและการจินตทัศน์สารสนเทศ', 'Certificate in Business Intelligence and Information Visualization ', '', 110),
+(111, 'หลักสูตรสัมฤทธิบัตรธุรกิจเชิงลึกและการวิเคราะห์ข้อมูล', 'Certificate in Business Insights and Data Analytics ', '', 111),
+(112, 'หลักสูตรสัมฤทธิบัตรการบริหารจัดการเมทาดาทา', 'Certificate in Metadata Management ', '', 112),
+(113, 'หลักฐานสัมฤทธิบัตรคลังข้อมูลดิจิทัลและเทคโนโลยีห้องสมุด', 'Certificate in Digital Repository and Library Technology ', '', 113),
+(114, 'หลักสูตรสัมฤทธิบัตรการจัดการความรู้', 'Certificate in Knowledge Management ', '', 114),
+(115, 'หลักสูตรสัมฤทธิบัตรการดูแลรักษาข้อมูลดิจิทัล', 'Certificate in Data Curation ', '', 115),
+(116, 'หลักสูตรสัมฤทธิบัตรการจัดระบบและการวิเคราะห์สารสนเทศ', 'Certificate in Information Organization and Analysis ', '', 116),
+(117, 'หลักสูตรสัมฤทธิบัตรการจัดการบริการสารสนเทศ', 'Certificate in Information Service Management ', '', 117),
+(118, 'หลักสูตรสัมฤทธิบัตรการจัดการสารสนเทศสํานักงาน', 'Certificate in Office Information Management', '', 118);
 
 -- --------------------------------------------------------
 
@@ -2134,7 +2577,7 @@ INSERT INTO `program` (`program_id`, `program_name_th`, `program_name_en`, `prog
 -- Table structure for table `student`
 --
 
-CREATE TABLE IF NOT EXISTS `student` (
+CREATE TABLE `student` (
   `id` varchar(13) NOT NULL,
   `std_id` varchar(11) NOT NULL,
   `std_nametitle` varchar(100) NOT NULL,
@@ -2438,6 +2881,19 @@ ALTER TABLE `enroll`
   ADD PRIMARY KEY (`enroll_id`);
 
 --
+-- Indexes for table `module`
+--
+ALTER TABLE `module`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `module_id` (`module_id`);
+
+--
+-- Indexes for table `module_of_course`
+--
+ALTER TABLE `module_of_course`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `program`
 --
 ALTER TABLE `program`
@@ -2457,52 +2913,75 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=226;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=226;
+
 --
 -- AUTO_INCREMENT for table `badge`
 --
 ALTER TABLE `badge`
-  MODIFY `badge_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=632;
+  MODIFY `badge_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=632;
+
 --
 -- AUTO_INCREMENT for table `badge_img`
 --
 ALTER TABLE `badge_img`
-  MODIFY `badge_img_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+  MODIFY `badge_img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
 --
 -- AUTO_INCREMENT for table `cert`
 --
 ALTER TABLE `cert`
-  MODIFY `cert_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `cert_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+
 --
 -- AUTO_INCREMENT for table `cert_of_student`
 --
 ALTER TABLE `cert_of_student`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=79;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+
 --
 -- AUTO_INCREMENT for table `cert_type`
 --
 ALTER TABLE `cert_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `course_of_program`
 --
 ALTER TABLE `course_of_program`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
 --
 -- AUTO_INCREMENT for table `diploma`
 --
 ALTER TABLE `diploma`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+
 --
 -- AUTO_INCREMENT for table `enroll`
 --
 ALTER TABLE `enroll`
-  MODIFY `enroll_id` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=917;
+  MODIFY `enroll_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=917;
+
+--
+-- AUTO_INCREMENT for table `module`
+--
+ALTER TABLE `module`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+
+--
+-- AUTO_INCREMENT for table `module_of_course`
+--
+ALTER TABLE `module_of_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+
 --
 -- AUTO_INCREMENT for table `program`
 --
 ALTER TABLE `program`
-  MODIFY `program_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `program_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
