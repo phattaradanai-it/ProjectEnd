@@ -9,6 +9,66 @@
   padding: 8px 16px;
   text-decoration: none;
 }
+
+.footer {
+    margin-top: 4vh;
+    background-color: #002c67;
+    padding: 25px 0px 20px 0px;
+    text-align: center;
+    position: sticky;
+}
+
+.footer-copy-right p {
+    margin: 0px;
+    font-size: 15px;
+    color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style the search field */
+form.search1 input[type=text] {
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid grey;
+  float: left;
+  width: 10%;
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+form.search1 button {
+  float: left;
+  width: 3%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 12px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+form.search1 button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+form.search1::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+      
+   
+  }
+
 </style>
 <?php
 session_start();
@@ -32,9 +92,16 @@ include "check_login.php";
 
 <body>
     <?php include 'header.php';?>]
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
         <br><br><br><br>
+         <!-- The form -->
+         <form class="search1" action="#">
+                <div class="center">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
     <div class="section-area  ">
         <div class="container-fluid">
 
@@ -69,7 +136,7 @@ include "check_login.php";
                  <div class="container-fluid">         
                     <div class="row">
                          <?php while ($result = mysqli_fetch_assoc($query))  { ?>
-                            <div class="col-sm-6 mx-auto">
+                            <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
                                          <h5 class="card-title"><?php echo $result['program_name_en']; ?><br>
@@ -112,7 +179,13 @@ include "check_login.php";
             </div>
 
         <!-- Footer -->
-
+        <div class="footer">
+            <div class="footer-copy-right p">
+                <p>โครงการจัดรูปแบบการบริหารวิชาการด้านเทคโนโลยีดิจิทัลรูปใหม่ มหาวิทยาลัยเทคโนโลยีสุรนารี 111
+                 มหาวิทยาลัยเทคโนโลยีสุรนารีต.สุรนารี อ.เมือง จ.นครราชสีมา 30000</p>
+                 <p>โทรศัพท์ : 044-223789 Email : digitech@sut.ac.th</p>
+            </div>
+        </div>
 
 
         <!-- Modal -->
