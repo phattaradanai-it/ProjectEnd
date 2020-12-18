@@ -65,9 +65,11 @@ form.search1::after {
 .center {
     display: flex;
     justify-content: center;
-      
-   
   }
+
+  /* .row {
+    margin-left: 80px !important;
+} */
 
 </style>
 <?php
@@ -76,7 +78,8 @@ include "check_login.php";
 ?>
 <!doctype html>
 <html class="no-js" lang="th">
-
+<?php $var_value = null;
+?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -96,12 +99,21 @@ include "check_login.php";
 
         <br><br><br><br>
          <!-- The form -->
-         <form class="search1" action="#">
+            <form class="search1"  name="search"  method="get" action="">
                 <div class="center">
-                <input type="text" placeholder="Search.." name="search">
+                <input type="text" placeholder="Search.." name="search" autocomplete="off">
                 <button type="submit"><i class="fa fa-search"></i></button>
                 </div>
             </form>
+            <br><br>
+        
+    <?php
+        error_reporting (E_ALL ^ E_NOTICE); 
+        $var_value = $_GET['search'];
+
+    ?>
+
+
     <div class="section-area  ">
         <div class="container-fluid">
 
@@ -115,68 +127,56 @@ include "check_login.php";
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $perpage = 6;
-                if (isset($_GET['page'])) {
-                     $page = $_GET['page'];
-                } else {
-                     $page = 1;
-                }
-                $start = ($page - 1) * $perpage;
+
+                
+                $sql2 = "SELECT * FROM student where std_firstname = '". $_SESSION["user_firstname"] ."'";
+                $query2 = mysqli_query($conn, $sql2)  or die ( $mysqli->error ); 
+                $result2 = mysqli_fetch_assoc($query2); 
                 
                 
-                $sql = "select id, course_of_program.program_id, program.program_name_th, program.program_name_en, 
-                course.course_name_th,course.course_name_en
-                from course_of_program 
-                LEFT JOIN program on course_of_program.program_id = program.program_id 
-                LEFT JOIN course on course_of_program.course_id = course.course_id
-                limit {$start} , {$perpage} ";
+                $sql5 = "SELECT * FROM program JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id = ".$result2['std_degree']." AND(program_name_en LIKE '%".$var_value."%' OR program_name_th LIKE '%".$var_value."%')";
+                $sql = "SELECT cert.cert_name_en FROM cert WHERE NOT EXISTS(SELECT*FROM cert_of_student WHERE cert_of_student.std_id = ".$result2['std_id']." AND cert_of_student.cert_id = cert.cert_id ) AND cert_type_id = ". $result2['std_degree'];
+                echo $sql;
                 $query = mysqli_query($conn, $sql)  or die ( $mysqli->error );
+                $pid=0;
                 ?>
-               
+                
                  <div class="container-fluid">         
                     <div class="row">
+                        
                          <?php while ($result = mysqli_fetch_assoc($query))  { ?>
+                         
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                         <h5 class="card-title"><?php echo $result['program_name_en']; ?><br>
-                                        <?php echo $result['program_name_th']; ?></h5>
-                                         <br>
-                                         <br>
-                                         <p>Course : <?php echo $result['course_name_en']; ?></p>
-                                         <p>รายวิชา : <?php echo $result['course_name_th']; ?></p>
+                                         <h5 class="card-title"><?php echo $result['cert_name_en']; ?><br>
+                                            
+                                            <br>
+                                            <br>
+                                            <?php
+                                            
+                                            $sql3 ="SELECT course.course_name_en FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = ".$result['program_id'];
+                                            $query3 = mysqli_query($conn, $sql3)  or die ( $mysqli->error ); ?>
+                                                 <?php while ($result3 = mysqli_fetch_assoc($query3))  { ?>
+                                                    <p>Course : <?php echo $result3['course_name_en']; ?></p>
+                                                 <?php } ?>
+
                                         <div class="float-right">
                                              <a href="#" class="btn btn-primary">Detail</a>
                                         </div>
                                     </div>
                                 </div><br><br>
                             </div>
+                            
                         <?php } ?>
                      </div>
                  </div>
 
-                <?php
-                $sql2 = "select * from course_of_program ";
-                $query2 = mysqli_query($conn, $sql2);
-                $total_record = mysqli_num_rows($query2);
-                $total_page = ceil($total_record / $perpage);
-                ?>
-                
+            </div>       
+        </div>
+    </div>
 
-                <div class="pagination">
-                    <a href="search_cert.php?page=1">&laquo;</a>
-                    <?php for($i=1;$i<=$total_page;$i++){ ?>
-                    <li><a href="search_cert.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                    <?php } ?>
-                    <a href="search_cert.php?page=<?php echo $total_page;?>">&raquo;</a>
-                </div>                        
-
-             
-
-                </div>       
-                </div>
-
-            </div>
+  
 
         <!-- Footer -->
         <div class="footer">
@@ -206,7 +206,6 @@ include "check_login.php";
                 </div>
             </div>
         </div>
-
     </div>
 
 
