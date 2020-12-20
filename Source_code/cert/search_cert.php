@@ -1,14 +1,4 @@
 <style>
-.pagination {
-  display: inline-block;
-}
-
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
 
 .footer {
     margin-top: 4vh;
@@ -34,7 +24,7 @@ form.search1 input[type=text] {
   font-size: 12px;
   border: 1px solid grey;
   float: left;
-  width: 10%;
+  width: 20%;
   background: #f1f1f1;
 }
 
@@ -43,7 +33,7 @@ form.search1 button {
   float: left;
   width: 3%;
   padding: 10px;
-  background: #2196F3;
+  background: #002c67;
   color: white;
   font-size: 12px;
   border: 1px solid grey;
@@ -67,6 +57,46 @@ form.search1::after {
     justify-content: center;
   }
 
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+* {
+    box-sizing: border-box;
+}
+
+div {
+    display: block;
+}
+.text-center {
+    text-align: center!important;
+}
+
+.card .text-white{
+    background-color: #002c67;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #002c67 !important;
+    border-color: #002c67 !important;
+}
+
+.body-section {
+    display: flow-root;
+    background-color: #fff;
+    padding: 2vh 1vw;
+}
+
+/* .card-body {
+ background-image: url("wallpapersut.jpg");
+} */
   /* .row {
     margin-left: 80px !important;
 } */
@@ -98,7 +128,7 @@ include "check_login.php";
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
         <br><br><br><br>
-         <!-- The form -->
+         <!-- form search and send value in page -->
             <form class="search1"  name="search"  method="get" action="">
                 <div class="center">
                 <input type="text" placeholder="Search.." name="search" autocomplete="off">
@@ -110,13 +140,11 @@ include "check_login.php";
     <?php
         error_reporting (E_ALL ^ E_NOTICE); 
         $var_value = $_GET['search'];
-
     ?>
 
 
     <div class="section-area  ">
         <div class="container-fluid">
-
             <div class="row cert-mg-t"> 
                 <!--  Certification  -->
 
@@ -127,43 +155,59 @@ include "check_login.php";
                     die("Connection failed: " . $conn->connect_error);
                 }
 
+          
+                
 
-                
-                $sql2 = "SELECT * FROM student where std_firstname = '". $_SESSION["user_firstname"] ."'";
+                $sql2 = "SELECT * FROM student where std_firstname = '". $_SESSION["user_firstname"] ."'";  
                 $query2 = mysqli_query($conn, $sql2)  or die ( $mysqli->error ); 
-                $result2 = mysqli_fetch_assoc($query2); 
+                $result2 = mysqli_fetch_assoc($query2); //query get degree
                 
                 
-                $sql5 = "SELECT * FROM program JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id = ".$result2['std_degree']." AND(program_name_en LIKE '%".$var_value."%' OR program_name_th LIKE '%".$var_value."%')";
-                $sql = "SELECT cert.cert_name_en FROM cert WHERE NOT EXISTS(SELECT*FROM cert_of_student WHERE cert_of_student.std_id = ".$result2['std_id']." AND cert_of_student.cert_id = cert.cert_id ) AND cert_type_id = ". $result2['std_degree'];
-                echo $sql;
+                $sql = "SELECT * FROM program JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id = ".$result2['std_degree']." AND(program_name_en LIKE '%".$var_value."%' OR program_name_th LIKE '%".$var_value."%')"; // ค้นหา
                 $query = mysqli_query($conn, $sql)  or die ( $mysqli->error );
-                $pid=0;
+                  // query fetch cert order by degree of student
+
                 ?>
                 
                  <div class="container-fluid">         
                     <div class="row">
-                        
-                         <?php while ($result = mysqli_fetch_assoc($query))  { ?>
-                         
-                            <div class="col-sm-6">
+                         <?php while ($result = mysqli_fetch_assoc($query))  {  ?>
+                            
+                            <div class="col-sm-6">  <!-----block fetch data --->
                                 <div class="card">
-                                    <div class="card-body">
-                                         <h5 class="card-title"><?php echo $result['cert_name_en']; ?><br>
-                                            
-                                            <br>
-                                            <br>
-                                            <?php
-                                            
-                                            $sql3 ="SELECT course.course_name_en FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = ".$result['program_id'];
-                                            $query3 = mysqli_query($conn, $sql3)  or die ( $mysqli->error ); ?>
-                                                 <?php while ($result3 = mysqli_fetch_assoc($query3))  { ?>
-                                                    <p>Course : <?php echo $result3['course_name_en']; ?></p>
-                                                 <?php } ?>
+                                    <div class="card-body " >
+                                         <h3 class="card-title">
+                                                <div class="card text-white">
+                                                <?php echo $result['cert_name_en'];  $send =$result['program_id'];  ?>
+                                                </div>
+                                         </h3><br>
 
-                                        <div class="float-right">
-                                             <a href="#" class="btn btn-primary">Detail</a>
-                                        </div>
+                                            <div class="card-deck">
+                                                <?php
+                                                $sql3 ="SELECT course.course_name_en FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = ".$result['program_id'];
+                                                $query3 = mysqli_query($conn, $sql3)  or die ( $mysqli->error ); ?> 
+                                                <?php while ($result3 = mysqli_fetch_assoc($query3))  { ?>
+                                                <div class="col-sm-6">
+                                                      <div class="card text-center">
+                                                            <img class="card-img-top" src="icon.png" alt="Card image cap" height="200" width="50">
+                                                            <div class="card-body">
+                                                                <p class="card-title"><?php echo $result3['course_name_en']; ?></p>
+                                                            </div>
+                                                     </div>
+                                                </div>
+                                                <?php } ?>
+                                            </div><br>
+
+                                                   
+                                        <form action="search_detail.php" method="get">
+                                            <!-- send detail in cert value -->
+                                            <input type="hidden" name="id" value="<?php echo $send  ?>">
+                                            <div class="float-right">
+                                                <button class="btn btn-primary" type="submit"> Detail > </button>
+                                            </div>
+                                        </form>
+
+
                                     </div>
                                 </div><br><br>
                             </div>
@@ -172,6 +216,8 @@ include "check_login.php";
                      </div>
                  </div>
 
+
+                
             </div>       
         </div>
     </div>
