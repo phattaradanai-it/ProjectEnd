@@ -62,6 +62,7 @@ form.search1::after {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
+ 
     
 }
 *, ::after, ::before {
@@ -91,7 +92,11 @@ div {
 .body-section {
     display: flow-root;
     background-color: #fff;
-    padding: 2vh 1vw;
+    padding: 2vh 2vw;
+}
+
+.section-area {
+    background-color: #f6f8fb;
 }
 
 /* .card-body {
@@ -126,37 +131,16 @@ include "check_login.php";
 <body>
     <?php include 'header.php';?>]
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-
-        <br><br><br><br>
-         <!-- form search and send value in page -->
-            <form class="search1"  name="search"  method="get" action="">
-                <div class="center">
-                <input type="text" placeholder="Search.." name="search" autocomplete="off">
-                <button type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </form>
-            <br><br>
         
     <?php
         error_reporting (E_ALL ^ E_NOTICE); 
         $var_value = $_GET['search'];
-    ?>
-
-
-    <div class="section-area  ">
-        <div class="container-fluid">
-            <div class="row cert-mg-t"> 
-                <!--  Certification  -->
-
-                <?php
+      
                 $conn = new mysqli("localhost","root", "", "digitech");
                 // Check connection
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
-
-          
-                
 
                 $sql2 = "SELECT * FROM student where std_firstname = '". $_SESSION["user_firstname"] ."'";  
                 $query2 = mysqli_query($conn, $sql2)  or die ( $mysqli->error ); 
@@ -165,11 +149,23 @@ include "check_login.php";
                 
                 $sql = "SELECT * FROM program JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id = ".$result2['std_degree']." AND(program_name_en LIKE '%".$var_value."%' OR program_name_th LIKE '%".$var_value."%')"; // ค้นหา
                 $query = mysqli_query($conn, $sql)  or die ( $mysqli->error );
-                  // query fetch cert order by degree of student
+                  // query fetch cert order by degree of student?>
 
-                ?>
-                
-                 <div class="container-fluid">         
+
+    <div class="section-area">
+        <div class="container-fluid">
+            <br><br><br>
+                    <!-- form search and send value in page -->
+                        <form class="search1"  name="search"  method="get" action="">
+                            <div class="center">
+                            <input type="text" placeholder="Search.." name="search" autocomplete="off">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                        <br><br>
+
+            <div class="row cert-mg-t"> 
+                <!--  Certification  -->      
                     <div class="row">
                          <?php while ($result = mysqli_fetch_assoc($query))  {  ?>
                             
@@ -189,7 +185,7 @@ include "check_login.php";
                                                 <?php while ($result3 = mysqli_fetch_assoc($query3))  { ?>
                                                 <div class="col-sm-6">
                                                       <div class="card text-center">
-                                                            <img class="card-img-top" src="icon.png" alt="Card image cap" height="200" width="50">
+                                                            <img class="card-img-top" src="icon.png" alt="Card image cap" height="200" width="40">
                                                             <div class="card-body">
                                                                 <p class="card-title"><?php echo $result3['course_name_en']; ?></p>
                                                             </div>
@@ -206,19 +202,13 @@ include "check_login.php";
                                                 <button class="btn btn-primary" type="submit"> Detail > </button>
                                             </div>
                                         </form>
-
-
                                     </div>
                                 </div><br><br>
                             </div>
                             
                         <?php } ?>
                      </div>
-                 </div>
-
-
-                
-            </div>       
+             </div>       
         </div>
     </div>
 

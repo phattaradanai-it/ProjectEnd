@@ -19,6 +19,11 @@
 
 }
 
+.ml-auto, .mx-auto {
+    margin-bottom: -5% !important;
+    margin-top: -5% !important;
+}
+
 </style>
 
 
@@ -29,7 +34,6 @@ session_cache_limiter('private_no_expire'); // works
 //session_cache_limiter('public'); // works too
 
 session_start();
-include "check_login.php";
 echo $_GET["id"]; 
  ?>
 
@@ -47,7 +51,7 @@ echo $_GET["id"];
 
  <body>
  <?php include 'header.php';?>]
-        <?php
+        <?php   $total_br = 0;
                 $conn = new mysqli("localhost","root", "", "digitech");
                 // Check connection
                 if ($conn->connect_error) {
@@ -58,13 +62,10 @@ echo $_GET["id"];
                 $query = mysqli_query($conn, $sql)  or die ( $mysqli->error );
 
                 $sql2 ="SELECT * FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = ".$_GET["id"];
-                $query2 = mysqli_query($conn, $sql2)  or die ( $mysqli->error ); 
-
-              
-        ?>
-
-    <br>
-    <br><br>
+                $query2 = mysqli_query($conn, $sql2)  or die ( $mysqli->error ); ?>
+    
+                
+    <br><br><br>
     <div class="container-fluid">   
         <?php
              while ($result = mysqli_fetch_assoc($query))  {  
@@ -74,32 +75,34 @@ echo $_GET["id"];
                     echo $result['program_name_th'];
                     echo"<br>";
                     echo"</h4>";
-                 }
-        ?>
+                 }?>
+
+
         <br>
         <div class="card-header text-center">
             <h5>โครงสร้างหลักสูตร</h5>
         </div>
         <br><br>
+
+        <h4>จำนวนหน่วยกิตรวมตลอดหลักสูตร 9 หน่วยกิต (ทวิภาค) รายวิชา</h4><br>
         <div class="card-deck"> 
-                 <?php while ($result2 = mysqli_fetch_assoc($query2))  {   ?>
+        <?php while ($result2 = mysqli_fetch_assoc($query2))  {  $total_br++ ?>
+              
             <div class="col-sm-6">      
                         <div class="card text-center">  
                             <div class="card-body">
                             <h5 class="card-title"><?php echo $result2['course_name_th']; ?></h5>
                                 <h5><?php echo $result2['course_name_en']; ?></h5><br><br>                   
-                            <img src="icons/data.png" class="rounded mx-auto d-block" height="420" width="50%"><br><br>
+                            <img src="icon.png" class="rounded mx-auto d-block" height="350" width="45%"><br><br>
                             <p class="card-text"><?php echo $result2['course_detail_th']; echo $result2['course_detail_en'];?> </p>
                             </div>
                         </div>
-                </div>
-            <?php } ?>
+             </div>
+            <?php } echo $total_br ?>
         </div>
-
-
     </div>
 
-
+            
     <div class="footer">
             <div class="footer-copy-right p">
                 <p>โครงการจัดรูปแบบการบริหารวิชาการด้านเทคโนโลยีดิจิทัลรูปใหม่ มหาวิทยาลัยเทคโนโลยีสุรนารี 111
@@ -109,3 +112,4 @@ echo $_GET["id"];
         </div>
 
 </body>
+</html>
