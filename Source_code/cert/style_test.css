@@ -121,12 +121,15 @@ img {
 
 .body-section .content .detail-button .more {
   padding: 0.3vh 4vh;
+  
   background-color: var(--element-color);
   color: #fff;
   font-size: 2vh;
   border: 0;
   text-align: center;
   cursor: pointer;
+  
+  
 }
 
 .body-section .line {
@@ -150,8 +153,8 @@ img {
 
   .body-section .content .detail-button {
     float: right;
-    margin-top: 1vh;
-    margin-bottom: 5vh;
+    margin-top: 3vh;
+    margin-bottom: 40px;
     
   }
 
@@ -159,10 +162,17 @@ img {
     padding: 0.5vh 4vh;
     font-size: 1.5vh;
     cursor: pointer;
-    ;
+    
     
   }
 }
+
+
+
+
+
+
+
 
 /* //////////  BADGE CARD  /////////// */
 

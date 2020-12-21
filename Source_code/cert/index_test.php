@@ -24,7 +24,7 @@ include "cert_function.php";
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <!-- style CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_test.css">
     <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr JS -->
     <!-- <script src="js/vendor/modernizr-2.8.3.min.js"></script> -->
@@ -35,8 +35,6 @@ include "cert_function.php";
     <?php include 'header.php';?>]
 
 
-
-    <h1>HELLO</h1>
     <!-- <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -48,25 +46,16 @@ include "cert_function.php";
         </div> -->
 
     <div class="section-area  ">
+        
+
+        
         <div class="container-fluid">
 
             <div class="row cert-mg-t">
 
                 <!--  Certification  -->
-                <?php !empty($_SESSION['cert']) ? include "cert.php" : '';?>
+                <?php !empty($_SESSION['cert']) ? include "cert_test.php" : '';?>
 
-                <!--  Badge  -->
-                <?php if (!empty($_SESSION['badge'])) {?>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="section header-section mb-2">
-                        Badge
-                    </div>
-                    <div class="section">
-                        <?php $badge = $_SESSION['badge'];?>
-                        <?php include "badge.php"?>
-                    </div>
-                </div>
-                <?php }?>
 
                 <!--  Attendance  -->
                 <?php !empty($_SESSION['attendance']) ? include "attendance.php" : ''?>

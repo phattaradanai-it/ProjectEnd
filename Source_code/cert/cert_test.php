@@ -33,12 +33,17 @@ foreach ($_SESSION['cert'] as $key => $value) {
                 <?php $cert = $value?>
                 <?php include "cert_template.php"?>
             </div>
+            
             <div class="content col-lg-9 col-md-8 col-sm-8 col-xs-12">
                 <div class="title ">
                     <?php echo $value->cert_name_en; ?>
-                    </br>
-                    <?php echo $value->cert_name_th; ?>
+                    
+                <!---------------->
+
+
                 </div>
+                
+                
                 <div class="detail">
                     <span> Approved by : <?php echo $value->cert_approve; ?></span></br>
                     <span> Approval date : <?php echo date("F j, Y", strtotime($value->cert_date)); ?></span></br>
