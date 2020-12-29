@@ -16,7 +16,10 @@
 .card-header{
     background-color: #002c67 !important;
     color: white;
-
+    margin-bottom: 20px !important;
+    margin-left: -45;
+    margin-right: -45;
+    
 }
 
 .ml-auto, .mx-auto {
@@ -24,7 +27,35 @@
     margin-top: -5% !important;
 }
 
+.body-section {
+    display: flow-root;
+    background-color: #fff;
+    padding: 2vh 2vw;
+}
+
+.section-area {
+    background-color: #f6f8fb;
+}
+
+.container-fluid {
+    width: 95% !important;
+    /* margin-top: 5%; */
+
+}
+
+.col-sm-6.detail{
+    margin-bottom: 50px;
+}
+
+.card-title{
+    background-color: #002c67 !important;
+    color: white;
+    margin-bottom: 20px !important;
+    margin-left: -20;
+    margin-right: -20;
+}
 </style>
+
 
 
 <?php
@@ -34,8 +65,8 @@ session_cache_limiter('private_no_expire'); // works
 //session_cache_limiter('public'); // works too
 
 session_start();
-echo $_GET["id"]; 
- ?>
+include "check_login.php";
+?>
 
 <!doctype html>
 <html lang="en">
@@ -51,7 +82,7 @@ echo $_GET["id"];
 
  <body>
  <?php include 'header.php';?>]
-        <?php   $total_br = 0;
+        <?php   
                 $conn = new mysqli("localhost","root", "", "digitech");
                 // Check connection
                 if ($conn->connect_error) {
@@ -62,12 +93,16 @@ echo $_GET["id"];
                 $query = mysqli_query($conn, $sql)  or die ( $mysqli->error );
 
                 $sql2 ="SELECT * FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = ".$_GET["id"];
-                $query2 = mysqli_query($conn, $sql2)  or die ( $mysqli->error ); ?>
-    
+                $query2 = mysqli_query($conn, $sql2)  or die ( $mysqli->error ); 
                 
-    <br><br><br>
-    <div class="container-fluid">   
-        <?php
+                $sql3 ="SELECT * FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = ".$_GET["id"];
+                $query3 = mysqli_query($conn, $sql3)  or die ( $mysqli->error );
+                ?>
+    
+    <div class="section-area">
+        <div class="container-fluid">
+        <br><br><br>          
+             <?php
              while ($result = mysqli_fetch_assoc($query))  {  
                     echo"<h4>";
                     echo $result['program_name_en'];
@@ -75,41 +110,59 @@ echo $_GET["id"];
                     echo $result['program_name_th'];
                     echo"<br>";
                     echo"</h4>";
-                 }?>
+                 }?><br>
+                <div class="card-header text-center">
+                    <h3>โครงสร้างหลักสูตร</h3>
+                </div>
+    <?php
+        $total = 0;
+        while ($result3 = mysqli_fetch_assoc($query3))  {  
+          $i = $result3['course_credit'];
+          $total = $total + $result3['course_credit'];
+        }
+    ?>
 
-
-        <br>
-        <div class="card-header text-center">
-            <h5>โครงสร้างหลักสูตร</h5>
-        </div>
-        <br><br>
-
-        <h4>จำนวนหน่วยกิตรวมตลอดหลักสูตร 9 หน่วยกิต (ทวิภาค) รายวิชา</h4><br>
+    <h5>จำนวนหน่วยกิตรวมตลอดหลักสูตร <?php echo $total;  ?> หน่วยกิต (ทวิภาค) รายวิชา</h5>
+        
+     <div class="row cert-mg-t"> 
+             
         <div class="card-deck"> 
-        <?php while ($result2 = mysqli_fetch_assoc($query2))  {  $total_br++ ?>
+        <?php while ($result2 = mysqli_fetch_assoc($query2))  { ?>
               
-            <div class="col-sm-6">      
+            <div class="col-sm-6 detail">      
                         <div class="card text-center">  
                             <div class="card-body">
-                            <h5 class="card-title"><?php echo $result2['course_name_th']; ?></h5>
-                                <h5><?php echo $result2['course_name_en']; ?></h5><br><br>                   
-                            <img src="icon.png" class="rounded mx-auto d-block" height="350" width="45%"><br><br>
-                            <p class="card-text"><?php echo $result2['course_detail_th']; echo $result2['course_detail_en'];?> </p>
+                            <h5 class="card-title"><?php echo $result2['course_name_th']."<br>"; ?>
+                                <?php echo $result2['course_name_en']; ?></h5><br>                  
+                            <img src="analytics.png" class="rounded mx-auto d-block" height="320" width="40%"><br><br>
+                            <p class="card-text"><?php echo "TH: ".$result2['course_detail_th']; echo " &nbsp;"." EN: ".$result2['course_detail_en'];?> </p>
                             </div>
-                        </div>
+                        </div>  
              </div>
-            <?php } echo $total_br ?>
+            <?php }  ?>
         </div>
+
     </div>
 
-            
+    </div>
+    </div>  
+
+
     <div class="footer">
             <div class="footer-copy-right p">
                 <p>โครงการจัดรูปแบบการบริหารวิชาการด้านเทคโนโลยีดิจิทัลรูปใหม่ มหาวิทยาลัยเทคโนโลยีสุรนารี 111
-                 มหาวิทยาลัยเทคโนโลยีสุรนารีต.สุรนารี อ.เมือง จ.นครราชสีมา 30000</p>
+                 มหาวิทยาลัยเทคโนโลยีสุรนารี ต.สุรนารี อ.เมือง จ.นครราชสีมา 30000</p>
                  <p>โทรศัพท์ : 044-223789 Email : digitech@sut.ac.th</p>
             </div>
         </div>
+
+
+       
+     
+    
+
+            
+       
 
 </body>
 </html>
