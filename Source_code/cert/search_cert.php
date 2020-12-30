@@ -13,10 +13,7 @@
         color: #fff;
     }
 
-    * {
-        box-sizing: border-box;
-    }
-
+  
     /* Style the search field */
     form.search1 input[type=text] {
         padding: 10px;
@@ -61,20 +58,15 @@
         -webkit-box-flex: 1;
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
-        padding: 1.25rem;
-
+        margin: -15;
 
     }
 
     *,
-    ::after,
-    ::before {
+    ::after,::before {
         box-sizing: border-box;
     }
 
-    * {
-        box-sizing: border-box;
-    }
 
     div {
         display: block;
@@ -87,6 +79,7 @@
     .card .text-white {
         background-color: #002c67;
         text-align: center;
+        margin-bottom: -10px;
     }
 
     .btn-primary {
@@ -101,7 +94,8 @@
     }
 
     .section-area {
-        background-color: #f6f8fb;
+        background-color: #f6f8fb;  
+        
     }
 
     .container-fluid {
@@ -109,12 +103,14 @@
 
     }
 
-    /* .card-body {
- background-image: url("wallpapersut.jpg");
-} */
-    /* .row {
-    margin-left: 80px !important;
-} */
+    .card-deck .card {
+    background-color: #ECF0F1;       
+}
+
+.pagination {
+    margin-top: -20px;
+    margin-bottom: 40px;
+}
 </style>
 <?php
 session_start();
@@ -136,10 +132,12 @@ include "check_login.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 </head>
 
 <body>
-    <?php include 'header.php'; ?>]
+    <?php include 'header.php';?>]
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <?php
@@ -152,14 +150,34 @@ include "check_login.php";
         die("Connection failed: " . $conn->connect_error);
     }
 
+
+    $perpage = 6;
+    if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+    } else {
+    $page = 1;
+    }
+    $start = ($page - 1) * $perpage;
+    
+
+
     $sql2 = "SELECT * FROM student where std_firstname = '" . $_SESSION["user_firstname"] . "'";
     $query2 = mysqli_query($conn, $sql2)  or die($mysqli->error);
     $result2 = mysqli_fetch_assoc($query2); //query get degree
 
 
-    $sql = "SELECT * FROM program JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id = " . $result2['std_degree'] . " AND(program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%')"; // ค้นหา
+    $sql = "SELECT * FROM program  JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id = " . $result2['std_degree'] . 
+    " AND(program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') limit {$start} , {$perpage}"; // ค้นหา
     $query = mysqli_query($conn, $sql)  or die($mysqli->error);
     // query fetch cert order by degree of student
+
+    
+    $sql4 = "SELECT * FROM program  JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id 
+    = ". $result2['std_degree'] ;
+    $query4 = mysqli_query($conn, $sql4);
+    $total_record = mysqli_num_rows($query4);
+    $total_page = ceil($total_record / $perpage);
+    //query count page
     ?>
 
 
@@ -174,6 +192,7 @@ include "check_login.php";
                 </div>
             </form>
             <br><br>
+
 
             <div class="row cert-mg-t">
                 <!--  Certification  -->
@@ -193,20 +212,22 @@ include "check_login.php";
 
                                     <div class="card-deck">
                                         <?php
-                                        $sql3 = "SELECT course.course_name_en FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = " . $result['program_id'];
+                                        $sql3 = "SELECT * FROM course  JOIN course_of_program ON course.course_id 
+                                        = course_of_program.course_id AND course_of_program.program_id = " . $result['program_id'] ;
                                         $query3 = mysqli_query($conn, $sql3)  or die($mysqli->error); ?>
                                         <?php while ($result3 = mysqli_fetch_assoc($query3)) { ?>
+
                                             <div class="col-sm-6">
                                                 <div class="card text-center">
-                                                    <img class="card-img-top" src="icon.png" alt="Card image cap" height="200" width="40">
                                                     <div class="card-body">
+                                                        <img class="card-img-top" src="img/icon_courses/<?php echo $result3['img']; ?>"  height="100" style="width: 40% !important; "> 
                                                         <p class="card-title"><?php echo $result3['course_name_en']; ?></p>
                                                     </div>
-                                                </div>
+                                                </div><br>
                                             </div>
+                                            
                                         <?php } ?>
                                     </div><br>
-
 
                                     <form action="search_detail.php" method="get">
                                         <!-- send detail in cert value -->
@@ -222,6 +243,21 @@ include "check_login.php";
                     <?php } ?>
                 </div>
             </div>
+
+
+
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-lg">
+                    <li class="page-item"><a class="page-link" href="search_cert.php?page=1">&laquo;</a></li>
+                    <?php for($i=1;$i<=$total_page;$i++){ ?>
+                    <li class="page-item "><a class="page-link" href="search_cert.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                    <?php } ?>
+                    <li class="page-item"><a class="page-link" href="search_cert.php?page=<?php echo $total_page;?>">&raquo;</a></li>
+                </ul>
+            </nav>
+    
+              
         </div>
     </div>
 

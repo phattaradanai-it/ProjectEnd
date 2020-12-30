@@ -54,6 +54,9 @@
     margin-left: -20;
     margin-right: -20;
 }
+.card-text:last-child {
+    text-align: left;
+}
 </style>
 
 
@@ -134,8 +137,8 @@ include "check_login.php";
                             <div class="card-body">
                             <h5 class="card-title"><?php echo $result2['course_name_th']."<br>"; ?>
                                 <?php echo $result2['course_name_en']; ?></h5><br>                  
-                            <img src="analytics.png" class="rounded mx-auto d-block" height="320" width="40%"><br><br>
-                            <p class="card-text"><?php echo "TH: ".$result2['course_detail_th']; echo " &nbsp;"." EN: ".$result2['course_detail_en'];?> </p>
+                            <img src="img/icon_courses/<?php echo $result2['img']; ?>" class="rounded mx-auto d-block" height="300" width="40%"><br><br>
+                            <p class="card-text"><?php echo "TH: ".$result2['course_detail_th']; echo "<br><br>"." EN: ".$result2['course_detail_en'];?> </p>
                             </div>
                         </div>  
              </div>
@@ -145,23 +148,16 @@ include "check_login.php";
     </div>
 
     </div>
-    </div>  
 
-
-    <div class="footer">
-            <div class="footer-copy-right p">
-                <p>โครงการจัดรูปแบบการบริหารวิชาการด้านเทคโนโลยีดิจิทัลรูปใหม่ มหาวิทยาลัยเทคโนโลยีสุรนารี 111
-                 มหาวิทยาลัยเทคโนโลยีสุรนารี ต.สุรนารี อ.เมือง จ.นครราชสีมา 30000</p>
-                 <p>โทรศัพท์ : 044-223789 Email : digitech@sut.ac.th</p>
+        <div class="footer">
+                    <div class="footer-copy-right p">
+                        <p>โครงการจัดรูปแบบการบริหารวิชาการด้านเทคโนโลยีดิจิทัลรูปใหม่ มหาวิทยาลัยเทคโนโลยีสุรนารี 111
+                        มหาวิทยาลัยเทคโนโลยีสุรนารี ต.สุรนารี อ.เมือง จ.นครราชสีมา 30000</p>
+                        <p>โทรศัพท์ : 044-223789 Email : digitech@sut.ac.th</p>
+                    </div>
             </div>
-        </div>
 
-
-       
-     
-    
-
-            
+    </div>  
        
 
 </body>
