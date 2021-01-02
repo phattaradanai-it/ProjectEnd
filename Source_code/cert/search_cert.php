@@ -227,7 +227,7 @@ include "check_login.php";
                                             </div>
 
                                         <?php } ?>
-                                    </div><br>
+                                    </div><br><br>
 
                                     <form action="search_detail.php" method="get">
                                         <!-- send detail in cert value -->
