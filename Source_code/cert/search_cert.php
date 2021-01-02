@@ -105,7 +105,7 @@
     }
 
     .card_img {
-        background-image: url("img/cert_img/background.jpg");
+        background-image: url("img/cert_img/background2.jpg");
         width: 100%;
         background-size: cover;
 

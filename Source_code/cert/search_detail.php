@@ -58,6 +58,12 @@
     text-align: left;
 }
 
+.card_img {
+        background-image: url("img/cert_img/background2.jpg");
+        width: 100%;
+        background-size: cover;
+    }
+
 
 </style>
 
@@ -135,19 +141,18 @@ include "check_login.php";
         <?php while ($result2 = mysqli_fetch_assoc($query2))  { ?>
               
             <div class="col-sm-6 detail">      
-                        <div class="card text-center">  
-                            <div class="card-body">
-                            <h5 class="card-title"><?php echo $result2['course_name_th']."<br>"; ?>
-                                <?php echo $result2['course_name_en']; ?></h5><br>                  
-                            <img src="img/icon_courses/<?php echo $result2['img']; ?>" class="rounded mx-auto d-block" height="280" width="40%"><br><br>
-                            <p class="card-text"><?php echo "TH: ".$result2['course_detail_th']; echo "<br><br>"." EN: ".$result2['course_detail_en'];?> </p>
-                            </div>
-                        </div>  
-             </div>
-            <?php }  ?>
-        </div>
-
-    </div>
+                        <div class="card text-center">
+                          
+                                <div class="card-body">
+                                <h5 class="card-title"><?php echo $result2['course_name_th']."<br>"; ?>
+                                    <?php echo $result2['course_name_en']; ?></h5><br>                  
+                                <img src="img/icon_courses/<?php echo $result2['img']; ?>" class="rounded mx-auto d-block" height="280" width="40%"><br><br>
+                                <p class="card-text"><?php echo "TH: ".$result2['course_detail_th']; echo "<br><br>"." EN: ".$result2['course_detail_en'];?> </p>
+                                </div>
+                            
+                            <?php }  ?>
+                        </div>
+            </div>
 
     </div>
 
