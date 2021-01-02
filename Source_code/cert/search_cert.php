@@ -56,12 +56,8 @@
     }
 
     .card-body {
-        -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
         margin: -15;
-        /* background-image: url("img/cert_img/background.jpg");
-        background-size: cover; */
+
     }
 
     *,
@@ -75,17 +71,6 @@
         display: block;
     }
 
-    .text-center {
-        text-align: center !important;
-    }
-
-    .card .text-white {
-
-        text-align: center;
-        margin-bottom: -10px;
-
-
-    }
 
     .btn-primary {
         background-color: #002c67 !important;
@@ -109,6 +94,7 @@
     }
 
     .card-deck .card {
+
         background-color: #ECF0F1;
 
     }
@@ -122,6 +108,7 @@
         background-image: url("img/cert_img/background.jpg");
         width: 100%;
         background-size: cover;
+
     }
 </style>
 
@@ -215,16 +202,15 @@ include "check_login.php";
                         <div class="col-sm-6">
                             <!-----block fetch data --->
                             <div class="card_img">
-                                <div class="card-body ">
-
+                                <div class="card-body">
                                     <h3 class="card-title">
-                                        <div class="card text-white" style="background-color: #002c67;">
+                                        <div class="card text-white text-center" style="background-color: #002c67;">
                                             <?php echo $result['cert_name_en'];
                                             $send = $result['program_id'];  ?>
                                         </div>
                                     </h3><br>
 
-                                    <div class=" card-deck">
+                                    <div class="card-deck">
                                         <?php
                                         $sql3 = "SELECT * FROM course  JOIN course_of_program ON course.course_id 
                                         = course_of_program.course_id AND course_of_program.program_id = " . $result['program_id'];
@@ -232,7 +218,7 @@ include "check_login.php";
                                         <?php while ($result3 = mysqli_fetch_assoc($query3)) { ?>
 
                                             <div class="col-sm-6">
-                                                <div class="card text-center">
+                                                <div class="card text-center" style="border-radius: 20px;">
                                                     <div class="card-body">
                                                         <img class="card-img-top" src="img/icon_courses/<?php echo $result3['img']; ?>" height="100" style="width: 40% !important; ">
                                                         <p class="card-title"><?php echo $result3['course_name_en']; ?></p>
