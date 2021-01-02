@@ -94,9 +94,7 @@
     }
 
     .card-deck .card {
-
         background-color: #ECF0F1;
-
     }
 
     .pagination {
