@@ -116,6 +116,12 @@
         margin-top: -20px;
         margin-bottom: 40px;
     }
+    .card_img{
+        background-image: url("img/cert_img/background.jpg");
+        background-repeat: no-repeat;
+        background-size: contain, cover;
+    }
+  
 </style>
 
 <?php
@@ -207,8 +213,9 @@ include "check_login.php";
 
                         <div class="col-sm-6">
                             <!-----block fetch data --->
-                            <div class="card">
+                            <div class="card_img">
                                 <div class="card-body ">
+                                
                                     <h3 class="card-title">
                                         <div class="card text-white">
                                             <?php echo $result['cert_name_en'];
