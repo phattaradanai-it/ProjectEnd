@@ -4,7 +4,7 @@
     <div class="section header-section">
 
         <div class="row">
-            <div class="col-sm-6" style="text-align:left"> Certification</div>
+            <div class="col-sm-6" style="text-align:left"> My Certification</div>
             <div class="col-sm-6" style="text-align:right;"><a style="color: #ffffff;" href="search_cert.php">ค้นหา</a></div>
         </div>  
          

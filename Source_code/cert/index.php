@@ -1,3 +1,33 @@
+<style>
+.header-section {
+    background-color: var(--content-color);
+    color: #fff;
+    font-size: 3vh;
+    margin-top: 2vh;
+    padding: 0.3vh 2vh;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    display: inline-block !important;
+    width: 20px !important;
+    height: 20px !important;
+    background-size: 100% 100% !important;
+   
+}
+
+.carousel-control-next-icon {
+    background-image: url("right.png") !important;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("left.png") !important;
+}
+
+
+
+</style>
+
+
 <?php
 session_start();
 include "check_login.php";
@@ -5,6 +35,7 @@ include "get_cert.php";
 include "get_badge.php";
 include "get_attendance.php";
 include "cert_function.php";
+
 
 // echo "<script>console.log('" . json_encode($_SESSION['attendance']) . "');</script>";
 ?>
@@ -21,28 +52,50 @@ include "cert_function.php";
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
 
     <!-- style CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr JS -->
     <!-- <script src="js/vendor/modernizr-2.8.3.min.js"></script> -->
+
+    
 </head>
 
 
 <body>
     <?php include 'header.php';?>]
 
-    <!-- <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="../images/logo_banner_white.png" alt="" /></a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+    <?php
+        $conn = new mysqli("localhost", "root", "", "digitech");
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql2 = "SELECT * FROM student where std_firstname = '" . $_SESSION["user_firstname"] . "'";
+        $query2 = mysqli_query($conn, $sql2)  or die($mysqli->error);
+        $result2 = mysqli_fetch_assoc($query2); //query get degree
+
+
+        $sql = "SELECT cert.cert_name_en FROM cert WHERE NOT EXISTS(SELECT*FROM cert_of_student WHERE cert_of_student.std_id = 
+        ".$result2['std_id']." AND cert_of_student.cert_id = cert.cert_id ) AND cert_type_id = ". $result2['std_degree'];
+        $query = mysqli_query($conn, $sql)  or die($mysqli->error);
+    ?>
+
+
 
     <div class="section-area  ">
         <div class="container-fluid">
@@ -56,7 +109,7 @@ include "cert_function.php";
                 <?php if (!empty($_SESSION['badge'])) {?>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="section header-section mb-2">
-                        Badge
+                        My Badge
                     </div>
                     <div class="section">
                         <?php $badge = $_SESSION['badge'];?>
@@ -67,8 +120,16 @@ include "cert_function.php";
 
                 <!--  Attendance  -->
                 <?php !empty($_SESSION['attendance']) ? include "attendance.php" : ''?>
+            </div> <br>
+         
 
+            <div class="section header-section mb-4">
+                Recommend Certificate
             </div>
+                <?php include "Recommend_cert.php"?>      
+            
+
+
         </div>
 
         <!-- Footer -->

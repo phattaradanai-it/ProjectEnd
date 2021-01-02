@@ -50,13 +50,15 @@
 .card-title{
     background-color: #002c67 !important;
     color: white;
-    margin-bottom: 20px !important;
+    margin-bottom: 35px !important;
     margin-left: -20;
     margin-right: -20;
 }
 .card-text:last-child {
     text-align: left;
 }
+
+
 </style>
 
 
@@ -137,7 +139,7 @@ include "check_login.php";
                             <div class="card-body">
                             <h5 class="card-title"><?php echo $result2['course_name_th']."<br>"; ?>
                                 <?php echo $result2['course_name_en']; ?></h5><br>                  
-                            <img src="img/icon_courses/<?php echo $result2['img']; ?>" class="rounded mx-auto d-block" height="300" width="40%"><br><br>
+                            <img src="img/icon_courses/<?php echo $result2['img']; ?>" class="rounded mx-auto d-block" height="280" width="40%"><br><br>
                             <p class="card-text"><?php echo "TH: ".$result2['course_detail_th']; echo "<br><br>"." EN: ".$result2['course_detail_en'];?> </p>
                             </div>
                         </div>  

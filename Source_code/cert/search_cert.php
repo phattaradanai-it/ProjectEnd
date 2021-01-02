@@ -38,6 +38,7 @@
         cursor: pointer;
     }
 
+
     form.search1 button:hover {
         background: #0b7dda;
     }
@@ -59,7 +60,8 @@
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
         margin: -15;
-
+        /* background-image: url("img/cert_img/background.jpg");
+        background-size: cover; */
     }
 
     *,
@@ -80,6 +82,8 @@
         background-color: #002c67;
         text-align: center;
         margin-bottom: -10px;
+        
+        
     }
 
     .btn-primary {
@@ -104,14 +108,16 @@
     }
 
     .card-deck .card {
-    background-color: #ECF0F1;       
-}
+    background-color: #ECF0F1;    
+       
+    }
 
-.pagination {
-    margin-top: -20px;
-    margin-bottom: 40px;
-}
+    .pagination {
+        margin-top: -20px;
+        margin-bottom: 40px;
+    }
 </style>
+
 <?php
 session_start();
 include "check_login.php";
@@ -267,7 +273,7 @@ include "check_login.php";
     <div class="footer">
         <div class="footer-copy-right p">
             <p>โครงการจัดรูปแบบการบริหารวิชาการด้านเทคโนโลยีดิจิทัลรูปใหม่ มหาวิทยาลัยเทคโนโลยีสุรนารี 111
-                มหาวิทยาลัยเทคโนโลยีสุรนารีต.สุรนารี อ.เมือง จ.นครราชสีมา 30000</p>
+                มหาวิทยาลัยเทคโนโลยีสุรนารี ต.สุรนารี อ.เมือง จ.นครราชสีมา 30000</p>
             <p>โทรศัพท์ : 044-223789 Email : digitech@sut.ac.th</p>
         </div>
     </div>
