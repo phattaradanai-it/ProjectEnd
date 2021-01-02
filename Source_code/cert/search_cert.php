@@ -13,7 +13,7 @@
         color: #fff;
     }
 
-  
+
     /* Style the search field */
     form.search1 input[type=text] {
         padding: 10px;
@@ -65,7 +65,8 @@
     }
 
     *,
-    ::after,::before {
+    ::after,
+    ::before {
         box-sizing: border-box;
     }
 
@@ -79,11 +80,11 @@
     }
 
     .card .text-white {
-        background-color: #002c67;
+
         text-align: center;
         margin-bottom: -10px;
-        
-        
+
+
     }
 
     .btn-primary {
@@ -98,8 +99,8 @@
     }
 
     .section-area {
-        background-color: #f6f8fb;  
-        
+        background-color: #f6f8fb;
+
     }
 
     .container-fluid {
@@ -108,20 +109,20 @@
     }
 
     .card-deck .card {
-    background-color: #ECF0F1;    
-       
+        background-color: #ECF0F1;
+
     }
 
     .pagination {
         margin-top: -20px;
         margin-bottom: 40px;
     }
-    .card_img{
+
+    .card_img {
         background-image: url("img/cert_img/background.jpg");
-        background-repeat: no-repeat;
-        background-size: contain, cover;
+        width: 100%;
+        background-size: cover;
     }
-  
 </style>
 
 <?php
@@ -149,7 +150,7 @@ include "check_login.php";
 </head>
 
 <body>
-    <?php include 'header.php';?>]
+    <?php include 'header.php'; ?>]
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <?php
@@ -165,12 +166,12 @@ include "check_login.php";
 
     $perpage = 6;
     if (isset($_GET['page'])) {
-    $page = $_GET['page'];
+        $page = $_GET['page'];
     } else {
-    $page = 1;
+        $page = 1;
     }
     $start = ($page - 1) * $perpage;
-    
+
 
 
     $sql2 = "SELECT * FROM student where std_firstname = '" . $_SESSION["user_firstname"] . "'";
@@ -178,14 +179,14 @@ include "check_login.php";
     $result2 = mysqli_fetch_assoc($query2); //query get degree
 
 
-    $sql = "SELECT * FROM program  JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id = " . $result2['std_degree'] . 
-    " AND(program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') limit {$start} , {$perpage}"; // ค้นหา
+    $sql = "SELECT * FROM program  JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id = " . $result2['std_degree'] .
+        " AND(program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') limit {$start} , {$perpage}"; // ค้นหา
     $query = mysqli_query($conn, $sql)  or die($mysqli->error);
     // query fetch cert order by degree of student
 
-    
+
     $sql4 = "SELECT * FROM program  JOIN cert ON program.cert_id = cert.cert_id AND cert.cert_type_id 
-    = ". $result2['std_degree'] ;
+    = " . $result2['std_degree'];
     $query4 = mysqli_query($conn, $sql4);
     $total_record = mysqli_num_rows($query4);
     $total_page = ceil($total_record / $perpage);
@@ -215,30 +216,30 @@ include "check_login.php";
                             <!-----block fetch data --->
                             <div class="card_img">
                                 <div class="card-body ">
-                                
+
                                     <h3 class="card-title">
-                                        <div class="card text-white">
+                                        <div class="card text-white" style="background-color: #002c67;">
                                             <?php echo $result['cert_name_en'];
                                             $send = $result['program_id'];  ?>
                                         </div>
                                     </h3><br>
 
-                                    <div class="card-deck">
+                                    <div class=" card-deck">
                                         <?php
                                         $sql3 = "SELECT * FROM course  JOIN course_of_program ON course.course_id 
-                                        = course_of_program.course_id AND course_of_program.program_id = " . $result['program_id'] ;
+                                        = course_of_program.course_id AND course_of_program.program_id = " . $result['program_id'];
                                         $query3 = mysqli_query($conn, $sql3)  or die($mysqli->error); ?>
                                         <?php while ($result3 = mysqli_fetch_assoc($query3)) { ?>
 
                                             <div class="col-sm-6">
                                                 <div class="card text-center">
                                                     <div class="card-body">
-                                                        <img class="card-img-top" src="img/icon_courses/<?php echo $result3['img']; ?>"  height="100" style="width: 40% !important; "> 
+                                                        <img class="card-img-top" src="img/icon_courses/<?php echo $result3['img']; ?>" height="100" style="width: 40% !important; ">
                                                         <p class="card-title"><?php echo $result3['course_name_en']; ?></p>
                                                     </div>
                                                 </div><br>
                                             </div>
-                                            
+
                                         <?php } ?>
                                     </div><br>
 
@@ -263,14 +264,14 @@ include "check_login.php";
             <nav aria-label="Page navigation">
                 <ul class="pagination pagination-lg">
                     <li class="page-item"><a class="page-link" href="search_cert.php?page=1">&laquo;</a></li>
-                    <?php for($i=1;$i<=$total_page;$i++){ ?>
-                    <li class="page-item "><a class="page-link" href="search_cert.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                    <?php for ($i = 1; $i <= $total_page; $i++) { ?>
+                        <li class="page-item "><a class="page-link" href="search_cert.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                     <?php } ?>
-                    <li class="page-item"><a class="page-link" href="search_cert.php?page=<?php echo $total_page;?>">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="search_cert.php?page=<?php echo $total_page; ?>">&raquo;</a></li>
                 </ul>
             </nav>
-    
-              
+
+
         </div>
     </div>
 
