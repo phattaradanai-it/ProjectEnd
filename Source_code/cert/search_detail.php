@@ -138,7 +138,7 @@ include "check_login.php";
 
                         <div class="col-sm-6 detail">
                             <div class="card text-center">
-                                <div class="card-body">
+                                <div class="card-body" >
                                     <h5 class="card-title"><?php echo $result2['course_name_th'] . "<br>"; ?>
                                         <?php echo $result2['course_name_en']; ?></h5><br>
                                     <img src="img/icon_courses/<?php echo $result2['img']; ?>" class="rounded mx-auto d-block" height="280" width="40%"><br><br>
