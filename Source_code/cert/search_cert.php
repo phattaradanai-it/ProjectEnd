@@ -110,13 +110,6 @@
         background-size: cover;
 
     }
-
-    .float-right {
-
-        margin-top: -20px;
-        margin-right: 25px;
-
-    }
 </style>
 
 <?php
