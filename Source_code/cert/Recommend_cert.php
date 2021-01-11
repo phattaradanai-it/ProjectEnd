@@ -187,7 +187,8 @@ $query2 = mysqli_query($conn, $sql2)  or die($mysqli->error);
 $result2 = mysqli_fetch_assoc($query2); //query get degree
 
 
-$sql = "SELECT * FROM program LIMIT 8"; // ค้นหา
+$sql = "SELECT cert.cert_id ,cert.cert_name_th ,cert.cert_name_en FROM cert WHERE NOT EXISTS(SELECT*FROM cert_of_student WHERE cert_of_student.std_id = 
+".$result2['std_id']." AND cert_of_student.cert_id = cert.cert_id ) AND cert_type_id = ". $result2['std_degree']." LIMIT 5"; 
     $query = mysqli_query($conn, $sql)  or die($mysqli->error);
  // query fetch cert order by degree of student
 
@@ -217,8 +218,9 @@ $i = 0;
 
                   <!-- title -->
                   <div class="card-head-title">
-                    <p class="card-title"><?php echo $result['program_name_en'] ?></p>
-                    <p class="card-title"><?php echo $result['program_name_th'] ?></p><br>
+                     <?php $send = $result['cert_id'];  ?>
+                    <p class="card-title"><?php echo $result['cert_name_en'] ?></p>
+                    <p class="card-title"><?php echo $result['cert_name_th'] ?></p><br>
                     <p class="card-sub-title"> <?php echo"Approved by : DIGITECH, Suranaree University of Technology" ?></p>
                   </div>
                 <div>
@@ -227,8 +229,8 @@ $i = 0;
       
                   <!-- submit button -->
                   <div class="form">
-                    <form action="course_detail.php" method="post">
-                      <input type="hidden" name="course" value="<?php echo htmlspecialchars(serialize($value)) ?>">
+                    <form action="search_detail.php" method="get">
+                      <input type="hidden" name="id" value="<?php echo $send ?>">
                       <button type="submit"> Detail > </button>
                     </form>
                   </div>

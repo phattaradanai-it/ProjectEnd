@@ -1,3 +1,5 @@
+
+
 <style>
 .header-section {
     background-color: var(--content-color);
@@ -35,6 +37,15 @@ include "get_cert.php";
 include "get_badge.php";
 include "get_attendance.php";
 include "cert_function.php";
+
+if (($_SESSION['user_std_id']) == 111) {
+    header("location: admin1.php");
+}
+
+
+// if (isset($_SESSION['user_id']  ) == 111) {
+//     header("location: admin1.php");
+// }
 
 
 // echo "<script>console.log('" . json_encode($_SESSION['attendance']) . "');</script>";
@@ -101,7 +112,8 @@ include "cert_function.php";
         <div class="container-fluid">
 
             <div class="row cert-mg-t">
-
+            
+            
                 <!--  Certification  -->
                 <?php !empty($_SESSION['cert']) ? include "cert.php" : '';?>
 
@@ -124,11 +136,17 @@ include "cert_function.php";
          
 
             <div class="section header-section mb-4">
-                Recommend Certificate
+                Recommend Certificate 
+                <?php      
+              
+             
+                
+                
+                ?>
             </div>
                 <?php include "Recommend_cert.php"?>      
             
-
+            
 
         </div>
 
@@ -155,6 +173,7 @@ include "cert_function.php";
         </div>
 
     </div>
+
 
     <?php if (isset($_SESSION["user_qr_login"]) && $_SESSION["user_qr_login"] == true) {?>
     <?php $_SESSION["user_qr_login"] = false;?>

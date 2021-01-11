@@ -217,15 +217,23 @@ include "check_login.php";
 
                                     <div class="card-deck">
                                         <?php
-                                        $sql3 = "SELECT * FROM course  JOIN course_of_program ON course.course_id 
-                                        = course_of_program.course_id AND course_of_program.program_id = " . $result['program_id'];
+                                        $sql3 = "SELECT 
+                                         course.course_name_en,badge_img.badge_img_name
+                                        FROM
+                                         course  
+                                        JOIN 
+                                        course_of_program ON course.course_id  = course_of_program.course_id 
+                                        JOIN 
+                                        badge_img ON course.badge_img_id = badge_img.badge_img_id
+                                        AND 
+                                        course_of_program.program_id = " . $result['program_id'];
                                         $query3 = mysqli_query($conn, $sql3)  or die($mysqli->error); ?>
-                                        <?php while ($result3 = mysqli_fetch_assoc($query3)) { ?>
 
+                                        <?php while ($result3 = mysqli_fetch_assoc($query3)) { ?>
                                             <div class="col-sm-6">
                                                 <div class="card text-center" style="border-radius: 20px;">
                                                     <div class="card-body">
-                                                        <img class="card-img-top" src="img/icon_courses/<?php echo $result3['img']; ?>" height="100" style="width: 40% !important; ">
+                                                        <img class="card-img-top" src="img/badge_img/gold/<?php echo $result3['badge_img_name']; ?>" height="100" style="width: 40% !important; ">
                                                         <p class="card-title"><?php echo $result3['course_name_en']; ?></p>
                                                     </div>
                                                 </div><br>

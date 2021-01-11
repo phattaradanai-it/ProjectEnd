@@ -2,6 +2,7 @@
 session_start();
 
 $service_url = 'https://digitech.sut.ac.th/api/api_qrcode.php';
+
 $curl = curl_init($service_url);
 $curl_get_data = array(
     'id' => $_GET["id"],

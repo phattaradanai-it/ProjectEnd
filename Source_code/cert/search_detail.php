@@ -99,7 +99,15 @@ include "check_login.php";
     $sql = "SELECT * FROM program where program_id =  " . $_GET["id"] . " ";
     $query = mysqli_query($conn, $sql)  or die($mysqli->error);
 
-    $sql2 = "SELECT * FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = " . $_GET["id"];
+    $sql2 = "SELECT 
+    * 
+    FROM 
+    course 
+    JOIN 
+    course_of_program ON course.course_id = course_of_program.course_id 
+    JOIN 
+    badge_img ON course.badge_img_id = badge_img.badge_img_id
+    AND course_of_program.program_id = " . $_GET["id"];
     $query2 = mysqli_query($conn, $sql2)  or die($mysqli->error);
 
     $sql3 = "SELECT * FROM course JOIN course_of_program ON course.course_id = course_of_program.course_id AND course_of_program.program_id = " . $_GET["id"];
@@ -141,7 +149,7 @@ include "check_login.php";
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $result2['course_name_th'] . "<br>"; ?>
                                         <?php echo $result2['course_name_en']; ?></h5><br>
-                                    <img src="img/icon_courses/<?php echo $result2['img']; ?>" class="rounded mx-auto d-block" height="280" width="40%"><br><br>
+                                    <img src="img/badge_img/gold/<?php echo $result2['badge_img_name']; ?>" class="rounded mx-auto d-block" height="280" width="50%"><br><br>
                                     <p class="card-text"><?php echo "TH: " . $result2['course_detail_th'];
                                                             echo "<br><br>" . " EN: " . $result2['course_detail_en']; ?> </p>
                                 </div>

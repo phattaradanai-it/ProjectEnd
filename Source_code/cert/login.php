@@ -5,6 +5,12 @@ if (isset($_SESSION['user_id'])) {
     header("location: index.php");
 }
 
+
+
+// if (isset ($_SESSION['user_id']) && ($_SESSION['user_std_id'] == 111)) {
+//     header("location: admin1.php");
+// }
+
 ?>
 
 <!doctype html>
@@ -109,10 +115,12 @@ if (isset($_SESSION['user_id'])) {
                     password: password,
                 },
                 success: function(response) {
+                    console.log(response);
                     if (response != null && response != "") {
-                        window.location.href = "./index.php";
+                            window.location.href = "./index.php";
                     } else {
-                        onLoginFailWarning();
+                        console.log("Fail");
+                       onLoginFailWarning();
                     }
                 }
             });
