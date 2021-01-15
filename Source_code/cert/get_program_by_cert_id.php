@@ -1,7 +1,7 @@
 <?php
 // session_start();
 
-$service_url = 'https://digitech.sut.ac.th/api/api_program_by_cert_id.php';
+$service_url = 'http://localhost/ProjectCertificate/Source_code/api/api_program_by_cert_id.php';
 $curl = curl_init($service_url);
 $curl_post_data = array(
     'cert_id' => $_SESSION['current_cert_id'],

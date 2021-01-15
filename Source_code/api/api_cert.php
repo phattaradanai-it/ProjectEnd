@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                       LEFT JOIN cert_of_student ON cert.cert_id = cert_of_student.cert_id
                                       LEFT JOIN cert_type ON cert.cert_type_id = cert_type.id
                                       LEFT JOIN badge_img ON cert_type.badge_img_id = badge_img.badge_img_id
-                              WHERE cert_of_student.std_id = '$id' AND cert_of_student.show_cer = '1' ");
+                              WHERE cert_of_student.std_id = '$id' ");
 
     if (!$qur) {
         $json = array("status" => 0, "msg" => "Query Error!");

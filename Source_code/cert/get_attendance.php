@@ -1,7 +1,7 @@
 <?php
 // session_start();
 
-$service_url = 'https://digitech.sut.ac.th/api/api_attendance.php';
+$service_url = 'http://localhost/ProjectCertificate/Source_code/api/api_attendance.php';
 $curl = curl_init($service_url);
 $curl_post_data = array(
     'id' => $_SESSION["user_std_id"],
