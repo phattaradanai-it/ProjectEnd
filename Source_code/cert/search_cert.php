@@ -93,9 +93,7 @@
 
     }
 
-    .card-deck .card {
-        background-color: #ECF0F1;
-    }
+ 
 
     .pagination {
         margin-top: -20px;

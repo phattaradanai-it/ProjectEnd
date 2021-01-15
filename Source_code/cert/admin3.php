@@ -176,7 +176,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 
 $sqlalldegree = "SELECT 
-        course.course_name_en,course.course_name_th,cert.cert_type_id,badge_img.badge_img_name
+        course.course_name_en,course.course_name_th,cert.cert_type_id,badge_img.badge_img_name,cert_type.id,cert_type.degree
         FROM 
         course_of_program
         LEFT JOIN
@@ -187,13 +187,15 @@ $sqlalldegree = "SELECT
         cert on cert.cert_id = program.cert_id
         LEFT JOIN 
         badge_img on badge_img.badge_img_id = course.badge_img_id 
+        LEFT JOIN 
+        cert_type on cert.cert_type_id = cert_type.id
         AND
         (course_name_en LIKE '%" . $var_value . "%' OR course_name_th LIKE '%" . $var_value . "%') 
         limit {$start} , {$perpage}";
 
 
 $sqldegree3 = "SELECT 
-        course.course_name_en,course.course_name_th,cert.cert_type_id,badge_img.badge_img_name
+        course.course_name_en,course.course_name_th,cert.cert_type_id,badge_img.badge_img_name,cert_type.degree
         FROM 
         course_of_program
         LEFT JOIN
@@ -204,14 +206,16 @@ $sqldegree3 = "SELECT
         cert on cert.cert_id = program.cert_id
         LEFT JOIN 
         badge_img on badge_img.badge_img_id = course.badge_img_id
-        where cert_type_id = 3 
+        LEFT JOIN 
+        cert_type on cert.cert_type_id = cert_type.id
+        where cert_type.degree = 'ปริญาตรี'
         AND
         (course_name_en LIKE '%" . $var_value . "%' OR course_name_th LIKE '%" . $var_value . "%')
         limit {$start} , {$perpage}";
         
 
 $sqldegree4 = "SELECT 
-        course.course_name_en,course.course_name_th,cert.cert_type_id,badge_img.badge_img_name
+        course.course_name_en,course.course_name_th,cert.cert_type_id,badge_img.badge_img_name,cert_type.degree
         FROM 
         course_of_program
         LEFT JOIN
@@ -222,13 +226,15 @@ $sqldegree4 = "SELECT
         cert on cert.cert_id = program.cert_id
         LEFT JOIN 
         badge_img on badge_img.badge_img_id = course.badge_img_id
-        where cert_type_id = 4 
+        LEFT JOIN 
+        cert_type on cert.cert_type_id = cert_type.id
+        where cert_type.degree = 'ปริญาโท'
         AND
         (course_name_en LIKE '%" . $var_value . "%' OR course_name_th LIKE '%" . $var_value . "%')
         limit {$start} , {$perpage}";
 
 $sqldegree5 = "SELECT 
-        course.course_name_en,course.course_name_th,cert.cert_type_id,badge_img.badge_img_name
+        course.course_name_en,course.course_name_th,cert.cert_type_id,badge_img.badge_img_name,cert_type.degree
         FROM 
         course_of_program
         LEFT JOIN
@@ -239,7 +245,9 @@ $sqldegree5 = "SELECT
         cert on cert.cert_id = program.cert_id
         LEFT JOIN 
         badge_img on badge_img.badge_img_id = course.badge_img_id
-        where cert_type_id = 5 
+        LEFT JOIN 
+        cert_type on cert.cert_type_id = cert_type.id
+        where cert_type.degree = 'ปริญาเอก'
         AND
         (course_name_en LIKE '%" . $var_value . "%' OR course_name_th LIKE '%" . $var_value . "%')
         limit {$start} , {$perpage}";
@@ -261,7 +269,6 @@ $sqlcount = "SELECT
 
 
 if($_GET['degree'] == 3){
-    echo"3";
     $query = mysqli_query($conn, $sqldegree3)  or die($mysqli->error);
 }else if($_GET['degree'] == 4){
     $query = mysqli_query($conn, $sqldegree4)  or die($mysqli->error);
@@ -332,7 +339,7 @@ if($_GET['degree'] == 3){
                     <th>No</th>
                     <th>CouresName</th>
                     <th>BadgeName</th>
-                    <th>CertType</th>
+                    <th>Degree</th>
              </tr>
             </thead>
             <?php $n =1;  while ($result = mysqli_fetch_assoc($query)) { ?>
@@ -340,7 +347,7 @@ if($_GET['degree'] == 3){
             <td><?php echo $n++;?></td>
             <td><?php echo $result["course_name_th"]; ?></td>
             <td><?php echo $result["badge_img_name"]; ?></td>
-            <td><?php echo $result["cert_type_id"]; ?></td>
+            <td><?php echo $result["degree"]; ?></td>
             </tr>           
              <?php }  ?>
     </table>

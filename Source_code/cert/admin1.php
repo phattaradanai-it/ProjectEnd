@@ -176,7 +176,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 $sqlalldegree = "SELECT  
         course.course_name_th,course.course_name_en,program.program_name_th,
-        program.program_name_en,program.program_name_en,cert.cert_type_id
+        program.program_name_en,program.program_name_en,cert.cert_type_id,cert_type.degree
         FROM 
         course_of_program
         LEFT JOIN
@@ -185,9 +185,27 @@ $sqlalldegree = "SELECT
         program on course_of_program.program_id = program.program_id 
         LEFT JOIN
         cert on  program.cert_id = cert.cert_id
-        AND
-        (program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') 
+        LEFT JOIN 
+        cert_type on cert_type.id = cert.cert_type_id
         limit {$start} , {$perpage}";
+
+
+$sqlsearch = "SELECT  
+        course.course_name_th,course.course_name_en,program.program_name_th,
+        program.program_name_en,program.program_name_en,cert.cert_type_id,cert_type.degree
+        FROM 
+        course_of_program
+        LEFT JOIN
+        course on course_of_program.course_id = course.course_id
+        LEFT JOIN
+        program on course_of_program.program_id = program.program_id 
+        LEFT JOIN
+        cert on  program.cert_id = cert.cert_id
+        LEFT JOIN 
+        cert_type on cert_type.id = cert.cert_type_id
+        WHERE program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%'
+        limit {$start} , {$perpage}";
+
 
 $sqlcount = "SELECT  
         course.course_name_th,course.course_name_en,program.program_name_th,
@@ -204,10 +222,9 @@ $sqlcount = "SELECT
 
 
         
-
 $sqldegree3 = "SELECT  
         course.course_name_th,course.course_name_en,program.program_name_th,
-        program.program_name_en,program.program_name_en,cert.cert_type_id
+        program.program_name_en,program.program_name_en,cert.cert_type_id,cert_type.degree
         FROM 
         course_of_program
         LEFT JOIN
@@ -216,15 +233,15 @@ $sqldegree3 = "SELECT
         program on course_of_program.program_id = program.program_id 
         LEFT JOIN
         cert on  program.cert_id = cert.cert_id
-        where cert.cert_type_id =  3
-        AND
-        (program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') 
+        LEFT JOIN 
+        cert_type on cert_type.id = cert.cert_type_id
+        where cert_type.degree =  'ปริญาตรี'
         limit {$start} , {$perpage} ";
 
 
 $sqldegree4 = "SELECT  
         course.course_name_th,course.course_name_en,program.program_name_th,
-        program.program_name_en,program.program_name_en,cert.cert_type_id
+        program.program_name_en,program.program_name_en,cert.cert_type_id,cert_type.degree
         FROM 
         course_of_program
         LEFT JOIN
@@ -233,16 +250,16 @@ $sqldegree4 = "SELECT
         program on course_of_program.program_id = program.program_id 
         LEFT JOIN
         cert on  program.cert_id = cert.cert_id
-        where cert.cert_type_id =  4
-        AND
-        (program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') 
+        LEFT JOIN 
+        cert_type on cert_type.id = cert.cert_type_id
+        where cert_type.degree =  'ปริญาโท'
         limit {$start} , {$perpage}";
 
 
 
 $sqldegree5 = "SELECT  
         course.course_name_th,course.course_name_en,program.program_name_th,
-        program.program_name_en,program.program_name_en,cert.cert_type_id
+        program.program_name_en,program.program_name_en,cert.cert_type_id,cert_type.degree
         FROM 
         course_of_program
         LEFT JOIN
@@ -251,13 +268,17 @@ $sqldegree5 = "SELECT
         program on course_of_program.program_id = program.program_id 
         LEFT JOIN
         cert on  program.cert_id = cert.cert_id
-        where cert.cert_type_id =  5
-        AND
-        (program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') 
+        LEFT JOIN 
+        cert_type on cert_type.id = cert.cert_type_id
+        where cert_type.degree =  'ปริญาเอก'
         limit {$start} , {$perpage}";
 
 
-if($_GET['degree'] == 3){
+
+
+if($_GET['search'] ==! null){
+        $query = mysqli_query($conn, $sqlsearch)  or die($mysqli->error);
+}else if($_GET['degree'] == 3){
         $query = mysqli_query($conn, $sqldegree3)  or die($mysqli->error);
 }else if($_GET['degree'] == 4){
         $query = mysqli_query($conn, $sqldegree4)  or die($mysqli->error);
@@ -328,32 +349,16 @@ $total_page = ceil($total_record / $perpage);
                                 <th>No</th>
                                 <th>ProgramName</th>
                                 <th>CourseName</th>
-                                <th>Type</th>
+                                <th>Degree</th>
                             </tr>
                         </thead>
 
-                        <?php $n =1; $qc="test"; $qc2="tt"; while ($result = mysqli_fetch_assoc($query)) { ?>
+                        <?php $n =1; while ($result = mysqli_fetch_assoc($query)) { ?>
                             <tr>
                                 <td><?php echo $n++;?></td>
-
-                                    <!-- <?php if($result["program_name_en"] == $qc){ ?>
-                                        <td><?php echo"-"  ?></td>
-                                       <?php }else{ ?>
-                                            <td><?php echo $result["program_name_en"]; ?></td>
-                                            <?php $qc = $result["program_name_en"]; ?>
-                                      <?php } ?> -->
-
-                                      <?php if($result["program_name_th"] == $qc2){ ?>
-                                        <td><?php echo"-"  ?></td>
-                                       <?php }else{ ?>
-                                            <td><?php echo $result["program_name_th"]; ?></td>
-                                            <?php $qc2 = $result["program_name_th"]; ?>
-                                      <?php } ?>
-
-                                        <td><?php echo $result["course_name_th"]; ?></td>
-                                        <td><?php echo $result["cert_type_id"]; ?></td>
-                                        <!-- <td><?php echo $result["course_name_en"]; ?></td> -->
-                                        
+                                <td><?php echo $result["program_name_th"]; ?></td>
+                                 <td><?php echo $result["course_name_th"]; ?></td>
+                                 <td><?php echo $result["degree"]; ?></td>        
                             </tr>           
                         <?php }  ?>
                     </table>
@@ -367,10 +372,12 @@ $total_page = ceil($total_record / $perpage);
                                         <li class="page-item "><a class="page-link" href="admin1.php?page=<?php echo $i; ?>search=&degree=3"><?php echo $i; ?></a></li>
                                 <?php }else if($_GET['degree'] == 4) { ?>
                                          <li class="page-item "><a class="page-link" href="admin1.php?page=<?php echo $i; ?>search=&degree=4"><?php echo $i; ?></a></li>
-                                <?php }else{ ?>
-                                        <li class="page-item "><a class="page-link" href="admin1.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                               <?php }else if($_GET['degree'] == 5) { ?>
+                                         <li class="page-item "><a class="page-link" href="admin1.php?page=<?php echo $i; ?>search=&degree=5"><?php echo $i; ?></a></li>
+                               <?php }else{ ?>
+                                     <li class="page-item "><a class="page-link" href="admin1.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                                 <?php } 
-                        } ?>
+                            }?>
                         </ul>
                      </nav>
                 </div>
@@ -391,6 +398,9 @@ $total_page = ceil($total_record / $perpage);
             <p>โทรศัพท์ : 044-223789 Email : digitech@sut.ac.th</p>
         </div>
     </div>
+
+<!--     
+<img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=https://devbanban.com/&choe=UTF-8" title="Link to my Website" /> -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

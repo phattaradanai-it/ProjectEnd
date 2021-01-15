@@ -134,10 +134,6 @@
             font-size: 15px;
             color: #fff;
         }
-
-      
-
-    
     </style>
 
 </head>
@@ -173,47 +169,58 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 
 $sqlalldegree = "SELECT 
-        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id
+        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id,cert_type.degree
         FROM
         program
         LEFT JOIN
         cert on program.cert_id = cert.cert_id 
-        AND
-        (program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') 
+        LEFT JOIN
+        cert_type on cert.cert_type_id = cert_type.id
         limit {$start} , {$perpage}";
-        
+
+$sqlsearch = "SELECT 
+        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id,cert_type.degree
+        FROM
+        program
+        LEFT JOIN
+        cert on program.cert_id = cert.cert_id 
+        LEFT JOIN
+        cert_type on cert.cert_type_id = cert_type.id
+        WHERE program_name_th LIKE '%" . $var_value . "%' OR cert_name_th LIKE '%" . $var_value . "%'
+        limit {$start} , {$perpage}";
+                
 
 $sqldegree3 = "SELECT 
-        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id
+        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id,cert_type.degree
         FROM
         program
         LEFT JOIN
-        cert on program.cert_id = cert.cert_id 
-        where cert.cert_type_id = 3
-        AND
-        (program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') 
+        cert on program.cert_id = cert.cert_id
+        LEFT JOIN
+        cert_type on cert.cert_type_id = cert_type.id
+        where cert_type.degree = 'ปริญาตรี'
         limit {$start} , {$perpage}";
 
 $sqldegree4 = "SELECT 
-        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id
+        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id,cert_type.degree
         FROM
         program
         LEFT JOIN
         cert on program.cert_id = cert.cert_id 
-        where cert.cert_type_id = 4
-        AND
-        (program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') 
+        LEFT JOIN
+        cert_type on cert.cert_type_id = cert_type.id
+        where cert_type.degree = 'ปริญาโท'
         limit {$start} , {$perpage}";
 
 $sqldegree5 = "SELECT 
-        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id
+        program.program_name_th,program.program_name_en,cert.cert_name_th,cert.cert_name_en,cert.cert_type_id,cert_type.degree
         FROM
         program
         LEFT JOIN
         cert on program.cert_id = cert.cert_id 
-        where cert.cert_type_id = 5
-        AND
-        (program_name_en LIKE '%" . $var_value . "%' OR program_name_th LIKE '%" . $var_value . "%') 
+        LEFT JOIN
+        cert_type on cert.cert_type_id = cert_type.id
+        where cert_type.degree = 'ปริญาเอก'
         limit {$start} , {$perpage}";
 
 $sqlcount = "SELECT 
@@ -227,7 +234,9 @@ $sqlcount = "SELECT
         $querycount = mysqli_query($conn, $sqlcount)  or die($mysqli->error);
 
 
-if($_GET['degree'] == 3){
+if($_GET['search'] ==! null){
+    $query = mysqli_query($conn, $sqlsearch)  or die($mysqli->error);
+}else if($_GET['degree'] == 3){
     $query = mysqli_query($conn, $sqldegree3)  or die($mysqli->error);
 }else if($_GET['degree'] == 4){
     $query = mysqli_query($conn, $sqldegree4)  or die($mysqli->error);
@@ -296,6 +305,7 @@ $total_page = ceil($total_record / $perpage);
                           
                                 <th>Program_Name_th</th>
                                 <th>Cert_Name_th</th>
+                                <th>Degree</th>
                             
                             </tr>
                         </thead>
@@ -306,6 +316,7 @@ $total_page = ceil($total_record / $perpage);
 
                                         <td><?php echo $result["program_name_th"]; ?></td>
                                         <td><?php echo $result["cert_name_th"]; ?></td>
+                                        <td><?php echo $result["degree"]; ?></td>
                                 
                                         
                             </tr>           
@@ -315,16 +326,18 @@ $total_page = ceil($total_record / $perpage);
 
                 <div class="next_bar">   
                     <nav aria-label="Page navigation">
-                        <ul class="pagination pagination-lg">
+                         <ul class="pagination pagination-lg">
                             <?php for ($i = 1; $i <= $total_page; $i++) { 
                                  if($_GET['degree'] == 3){ ?>
                                         <li class="page-item "><a class="page-link" href="admin2.php?page=<?php echo $i; ?>search=&degree=3"><?php echo $i; ?></a></li>
                                 <?php }else if($_GET['degree'] == 4) { ?>
                                          <li class="page-item "><a class="page-link" href="admin2.php?page=<?php echo $i; ?>search=&degree=4"><?php echo $i; ?></a></li>
-                                <?php }else{ ?>
-                                        <li class="page-item "><a class="page-link" href="admin2.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                               <?php }else if($_GET['degree'] == 5) { ?>
+                                         <li class="page-item "><a class="page-link" href="admin2.php?page=<?php echo $i; ?>search=&degree=5"><?php echo $i; ?></a></li>
+                               <?php }else{ ?>
+                                     <li class="page-item "><a class="page-link" href="admin2.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                                 <?php } 
-                        } ?>
+                            }?>
                         </ul>
                      </nav>
                 </div>

@@ -43,7 +43,7 @@ use chillerlan\QRCode\QRCode;
                 </div>
             </div>
             <?php?>
-
+            
 <!-- ถึงนี้ -->
             <?php $img_qr = "https://digitech.sut.ac.th/cert/verify_qrcode.php?id=" . $_SESSION['user_hcode']?>
             <img class="text-cert-qr" src="<?php echo (new QRCode)->render($img_qr) ?> " alt="QR Code" />
